@@ -163,14 +163,6 @@
       padding: 8px;
     }
 
-    .mobile-menu-toggle span {
-      display: block;
-      width: 25px;
-      height: 1.5px;
-      background: var(--white);
-      transition: all 0.3s ease;
-    }
-
     /* Hero */
     .hero {
       min-height: 100vh;
@@ -359,12 +351,6 @@
       backdrop-filter: blur(4px);
     }
 
-    .about-img-overlay span {
-      color: var(--gold);
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-
     .about-img-overlay p {
       color: var(--white);
       font-size: 0.85rem;
@@ -380,7 +366,7 @@
       opacity: 1;
     }
 
-    /* Beyond Coaching Section (New) */
+    /* Beyond Coaching Section */
     .beyond-coaching {
       padding: 100px 0;
       background-color: var(--black);
@@ -423,7 +409,7 @@
       font-size: 1.25rem !important;
     }
 
-    /* Events Section */
+    /* Events Section & Dynamic 3D Stack */
     .events {
       padding: 100px 0;
       background-color: var(--charcoal);
@@ -448,6 +434,7 @@
       max-width: 400px;
       height: 480px;
       margin: 0 auto;
+      user-select: none;
     }
 
     .stack-card {
@@ -457,28 +444,7 @@
       object-fit: cover;
       border: 4px solid var(--charcoal);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-      transition: transform 0.4s ease;
-    }
-
-    .stack-card.back-2 {
-      transform: rotate(-6deg) translate(-15px, -10px);
-      z-index: 1;
-      opacity: 0.5;
-    }
-
-    .stack-card.back-1 {
-      transform: rotate(4deg) translate(10px, 5px);
-      z-index: 2;
-      opacity: 0.8;
-    }
-
-    .stack-card.main-front {
-      transform: rotate(-1deg);
-      z-index: 3;
-    }
-
-    .image-stack-container:hover .stack-card.main-front {
-      transform: rotate(0deg) scale(1.02);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.6s ease;
     }
 
     /* Footer */
@@ -501,11 +467,6 @@
       font-size: 2rem;
       color: var(--white);
       margin-bottom: 0.75rem;
-    }
-
-    .footer-brand h2 span {
-      color: var(--gold);
-      font-style: italic;
     }
 
     .footer-brand p {
@@ -559,7 +520,7 @@
       
       .about-grid, .beyond-grid, .events-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 4rem;
         text-align: center;
       }
 
@@ -587,49 +548,18 @@
     }
 
     .approche-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-
-    .stack-card {
-      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s step-end;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
     }
 
-    .stack-card.back-2 { transform: rotate(-6deg) translate(-15px, -10px); z-index: 1; opacity: 0.4; pointer-events: none; }
-    .stack-card.back-1 { transform: rotate(4deg) translate(10px, 5px); z-index: 2; opacity: 0.7; pointer-events: none; }
-    .stack-card.main-front { transform: rotate(-1deg); z-index: 3; opacity: 1; pointer-events: auto; }
-
-    
+    @media (max-width: 768px) {
+      .approche-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+    }
   </style>
-   
-  <!-- Script JavaScript pour le changement au clic -->
-  <script>
-    document.getElementById('eventStack').addEventListener('click', function() {
-      // Récupère toutes les images de la pile
-      const cards = this.querySelectorAll('.stack-card');
-      
-      // Les classes CSS de positionnement de la pile
-      const classes = ['back-2', 'back-1', 'main-front'];
-      
-      cards.forEach(card => {
-        // 1. On trouve la classe actuelle de l'image
-        let currentClass = '';
-        classes.forEach(cls => {
-          if (card.classList.contains(cls)) {
-            currentClass = cls;
-          }
-        });
-        
-        // 2. On détermine la prochaine classe (rotation des index)
-        let currentIndex = classes.indexOf(currentClass);
-        let nextIndex = (currentIndex + 1) % classes.length;
-        
-        // 3. On applique le changement de classe pour mettre à jour la position 3D
-        card.classList.remove(currentClass);
-        card.classList.add(classes[nextIndex]);
-      });
-    });
-  </script>
 </head>
 
 <body>
@@ -639,12 +569,12 @@
       <ul class="nav-links">
         <li><a href="#home">Accueil</a></li>
         <li><a href="#about">À Propos</a></li>
+        <li><a href="#approche">Approche</a></li>
         <li><a href="#engagement">Engagement</a></li>
         <li><a href="#events">Événements</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
-      </button>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu"></button>
     </nav>
   </header>
 
@@ -653,15 +583,14 @@
       <div class="hero-content">
         <div class="hero-eyebrow">Coach certifié PNL et conférencière</div>
         <h1>Deviens cette personne que tu devrais <em>être.</em></h1>
-        <p>Coaching pour les personnes prêtes à entreprendre un véritable travail sur elles-mêmes — développer la maturité, la clarté, la <em>profondeur émotionnelle</em> et le courage de vivre avec intention.</p>
+        <p>Coaching pour les personnes prêtes à entreprendre un véritable travail sur elles-mêmes — développer la maturité, la <em>profondeur émotionnelle</em> et le courage de vivre avec intention.</p>
         <div class="cta-group">
           <a href="#contact" class="btn btn-primary">Commencez votre cheminement</a>
           <a href="https://surl.li/bplmuj" target="_blank" class="btn btn-outline" rel="noopener noreferrer">Réservez votre moment</a>
         </div>
       </div>
       <div class="hero-badge">
-        <span></span>
-        Maturité. Clarté. Pouvoir.
+        <span></span>Maturité. Clarté. Pouvoir.
       </div>
     </div>
   </section>
@@ -688,7 +617,6 @@
     </div>
   </section>
 
-  <!-- Section: Approche & Bénéfices (Coaching PNL vs Conférence) -->
   <section class="approche" id="approche" style="padding: 100px 0; background-color: var(--charcoal); border-top: 1px solid rgba(255, 255, 255, 0.05);">
     <div class="container">
       <div style="text-align: center; margin-bottom: 4rem;">
@@ -700,91 +628,86 @@
         </p>
       </div>
 
-      <!-- Grille Côte à Côte -->
-      <div class="approche-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 5px;">
-        
-        <!-- Colonne 1: Coaching PNL -->
-        <div class="approche-card" style="background: var(--black); padding: 3rem 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05); position: relative;">
+      <div class="approche-grid">
+        <div class="approche-card" style="background: var(--black); padding: 3rem 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05);">
           <div style="font-size: 2rem; color: var(--gold); margin-bottom: 1rem;">⚙</div>
           <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 700;">Le Coaching PNL Intentionnel</h3>
-          <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
-            La Programmation Neuro-Linguistique (PNL) est une approche orientée vers les solutions. Elle étudie vos schémas de pensée, vos comportements et vos modes de communication pour reprogrammer ce qui vous freine. En séance individuelle, Ronide vous aide à décoder vos blocages inconscients et à aligner vos actions sur vos aspirations profondes.
+          <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7;">
+            La Programmation Neuro-Linguistique (PNL) est une approche orientée vers les solutions. Elle étudie vos schémas de pensée, vos comportements et vos modes de communication pour reprogrammer ce qui vous freine.
           </p>
         </div>
 
-        <!-- Colonne 2: Conférencière -->
-        <div class="approche-card" style="background: var(--black); padding: 3rem 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05); position: relative;">
+        <div class="approche-card" style="background: var(--black); padding: 3rem 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05);">
           <div style="font-size: 2rem; color: var(--gold); margin-bottom: 1rem;">🎙</div>
           <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 700;">Une Conférencière d'Impact</h3>
-          <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
-            Sur scène, Ronide Casséus ne fait pas que transmettre du savoir : elle transmet une énergie et un vécu hors du commun. À travers des partages authentiques, des métaphores puissantes et des outils concrets, ses conférences agissent comme un catalyseur collectif, éveillant la résilience et le leadership émotionnel au sein des groupes et des organisations.
+          <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7;">
+            Sur scène, Ronide Casséus transmet une énergie et un vécu hors du commun. À travers des partages authentiques et des outils concrets, ses conférences agissent comme un catalyseur collectif éveillant la résilience.
           </p>
         </div>
-
       </div>
 
-      <!-- Section Impact Global (Toutes les sphères de vie) -->
       <div class="impact-box" style="margin-top: 4rem; background: radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.05), transparent 70%); padding: 3rem; border: 1px solid rgba(201, 168, 76, 0.2); text-align: center;">
         <h4 style="font-family: var(--font-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 1.5rem;">Ce que cela vous apporte — Dans toutes les sphères de votre vie</h4>
-        
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; text-align: left; margin-top: 2rem;">
           <div>
-            <h5 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600;">✦ Clarté & Maturité Professionnelle</h5>
-            <p style="color: var(--gray); font-size: 0.95rem;">Prendre des décisions alignées, développer votre posture de leader et traverser les transitions de carrière avec une vision stratégique et une confiance inébranlable.</p>
+            <h5 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600;">✦ Clarté &amp; Maturité Professionnelle</h5>
+            <p style="color: var(--gray); font-size: 0.95rem;">Prendre des décisions alignées, développer votre posture de leader et traverser les transitions avec clarté.</p>
           </div>
           <div>
-            <h5 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600;">✦ Force Émotionnelle & Résilience</h5>
-            <p style="color: var(--gray); font-size: 0.95rem;">Apprendre à naviguer à travers le deuil, les épreuves ou les changements majeurs de la vie en transformant la douleur en un levier de reconstruction.</p>
+            <h5 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600;">✦ Force Émotionnelle &amp; Résilience</h5>
+            <p style="color: var(--gray); font-size: 0.95rem;">Apprendre à naviguer à travers le deuil ou les épreuves en transformant la douleur en levier de reconstruction.</p>
           </div>
           <div>
-            <h5 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600;">✦ Alignement Personnel & Relations</h5>
-            <p style="color: var(--gray); font-size: 0.95rem;">Mieux communiquer, désamorcer les conflits internes et bâtir des relations authentiques en comprenant enfin vos propres mécanismes psychologiques.</p>
+            <h5 style="color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600;">✦ Alignement Personnel &amp; Relations</h5>
+            <p style="color: var(--gray); font-size: 0.95rem;">Mieux communiquer, désamorcer les conflits internes et bâtir des relations authentiques.</p>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
   <section class="beyond-coaching" id="engagement">
     <div class="container">
       <span class="eyebrow">Au-delà du Coaching</span>
-      <h2 class="section-title">Racines & Résilience à Montréal</h2>
+      <h2 class="section-title">Racines &amp; Résilience à Montréal</h2>
       <div class="gold-line"></div>
       
       <div class="beyond-grid">
         <div class="beyond-card">
           <h3>20 ans d'ancrage communautaire</h3>
-          <p>Bien avant de guider ses clients, Ronide a consacré plus de deux décennies de sa vie au terrain à Montréal-Nord, dans les rues de Chartrand, dans les coeurs des femmes et des familles du quartier. 
-            Intervenante dévouée, elle a travaillé sans relâche auprès des jeunes et de leurs familles pour bâtir des ponts, offrir du soutien et inspirer les générations futures à s'élever au-dessus des obstacles. Elle a
-          su élever plusieurs jeunes à leur sommet, tout en restant humble.</p>
+          <p>Bien avant de guider ses clients, Ronide a consacré plus de deux décennies de sa vie au terrain à Montréal-Nord, dans les rues de Chartrand, dans les coeurs des femmes et des familles du quartier. Intervenante dévouée, elle a travaillé sans relâche auprès des jeunes pour bâtir des ponts et les élever à leur sommet.</p>
         </div>
 
         <div class="beyond-card">
           <h3>Transformer l'épreuve en lumière</h3>
           <p>En août 2022, la vie de Ronide a été bouleversée par la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
           <p class="beyond-quote">« C'était mon enfant, mais c'était aussi mon meilleur ami et mon confident. On était une équipe. »</p>
-          <p>Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), transformant sa propre résilience en une boussole pour ceux qui traversent les tempêtes les plus sombres de l'existence.</p>
+          <p>Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), transformant sa propre résilience en boussole.</p>
         </div>
       </div>
     </div>
   </section>
 
- <!-- Section Événements Interactive -->
   <section class="events" id="events">
     <div class="container">
       <div class="events-grid">
         
-        <!-- Conteneur de la pile (Ajout d'un ID pour le JavaScript) -->
         <div class="image-stack-container" id="eventStack" style="cursor: pointer;">
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement" class="stack-card back-2" />
-          <img src="./images/Ronide-Photo-52.png" alt="Événement" class="stack-card back-1" />
-          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement Principal" class="stack-card main-front" />
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement 1" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement 2" class="stack-card" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement 3" class="stack-card" />
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement 4" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement 5" class="stack-card" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement 6" class="stack-card" />
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement 7" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement 8" class="stack-card" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement 9" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement 10" class="stack-card" />
         </div>
         
         <div class="events-text">
-          <span class="eyebrow">Parcours & Rencontres</span>
-          <h2 class="section-title">Événements & Conférences</h2>
+          <span class="eyebrow">Parcours &amp; Rencontres</span>
+          <h2 class="section-title">Événements &amp; Conférences</h2>
           <div class="gold-line"></div>
           <p>Présente lors de grands rassemblements inspirants, Ronide partage sa vision de l'alignement personnel et de la maturité émotionnelle à travers des ateliers interactifs et des interventions marquantes.</p>
           <p>Restez à l'affût des prochains ateliers immersifs et des masterclasses prévues pour vous aider à cultiver votre espace de puissance interne.</p>
@@ -802,9 +725,9 @@
         </div>
         <div class="footer-contact">
           <h4>Commençons</h4>
-          <a href="mailto:ronidecasseus@gmail.com"><span>✉</span><span></span>ronidecasseus@gmail.com</a>
-          <a href="tel:+15145889168"><span>✆</span><span></span>(514) 588-9168</a>
-          <a href="https://surl.li/bplmuj" target="_blank" rel="noopener noreferrer"><span></span>Réservez votre moment</a>
+          <a href="mailto:ronidecasseus@gmail.com"><span>✉</span> ronidecasseus@gmail.com</a>
+          <a href="tel:+15145889168"><span>✆</span> (514) 588-9168</a>
+          <a href="https://surl.li/bplmuj" target="_blank" rel="noopener noreferrer">Réservez votre moment</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -813,5 +736,56 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const stack = document.getElementById('eventStack');
+      const cards = Array.from(stack.querySelectorAll('.stack-card'));
+      let currentIndex = 0;
+
+      // Fonction pour appliquer les positions 3D à toutes les cartes
+      function updateStack() {
+        cards.forEach((card, index) => {
+          // Calcul de la position relative par rapport à l'image active
+          let position = (index - currentIndex + cards.length) % cards.length;
+
+          if (position === 0) {
+            // Image sur le dessus (Active)
+            card.style.transform = "rotate(-1deg) translate(0px, 0px) scale(1)";
+            card.style.zIndex = cards.length;
+            card.style.opacity = "1";
+            card.style.pointerEvents = "auto";
+          } else if (position === 1) {
+            // Première image en arrière-plan
+            card.style.transform = "rotate(4deg) translate(10px, 5px) scale(0.98)";
+            card.style.zIndex = cards.length - 1;
+            card.style.opacity = "0.7";
+            card.style.pointerEvents = "none";
+          } else if (position === 2) {
+            // Deuxième image en arrière-plan
+            card.style.transform = "rotate(-6deg) translate(-15px, -10px) scale(0.96)";
+            card.style.zIndex = cards.length - 2;
+            card.style.opacity = "0.4";
+            card.style.pointerEvents = "none";
+          } else {
+            // Toutes les autres images cachées derrière les premières
+            card.style.transform = `rotate(${Math.sin(position) * 5}deg) translate(0px, 15px) scale(0.92)`;
+            card.style.zIndex = cards.length - position;
+            card.style.opacity = "0";
+            card.style.pointerEvents = "none";
+          }
+        });
+      }
+
+      // Initialisation de la pile au chargement
+      updateStack();
+
+      // Événement au clic pour passer à la suivante en boucle
+      stack.addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateStack();
+      });
+    });
+  </script>
 </body>
 </html>
