@@ -590,7 +590,46 @@
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
   }
+
+    .stack-card {
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s step-end;
+    }
+
+    .stack-card.back-2 { transform: rotate(-6deg) translate(-15px, -10px); z-index: 1; opacity: 0.4; pointer-events: none; }
+    .stack-card.back-1 { transform: rotate(4deg) translate(10px, 5px); z-index: 2; opacity: 0.7; pointer-events: none; }
+    .stack-card.main-front { transform: rotate(-1deg); z-index: 3; opacity: 1; pointer-events: auto; }
+
+    
   </style>
+   
+  <!-- Script JavaScript pour le changement au clic -->
+  <script>
+    document.getElementById('eventStack').addEventListener('click', function() {
+      // Récupère toutes les images de la pile
+      const cards = this.querySelectorAll('.stack-card');
+      
+      // Les classes CSS de positionnement de la pile
+      const classes = ['back-2', 'back-1', 'main-front'];
+      
+      cards.forEach(card => {
+        // 1. On trouve la classe actuelle de l'image
+        let currentClass = '';
+        classes.forEach(cls => {
+          if (card.classList.contains(cls)) {
+            currentClass = cls;
+          }
+        });
+        
+        // 2. On détermine la prochaine classe (rotation des index)
+        let currentIndex = classes.indexOf(currentClass);
+        let nextIndex = (currentIndex + 1) % classes.length;
+        
+        // 3. On applique le changement de classe pour mettre à jour la position 3D
+        card.classList.remove(currentClass);
+        card.classList.add(classes[nextIndex]);
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -731,17 +770,18 @@
     </div>
   </section>
 
+ <!-- Section Événements Interactive -->
   <section class="events" id="events">
     <div class="container">
       <div class="events-grid">
-        <div class="image-stack-container">
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement Passé" class="stack-card back-2" />
-          <img src="./images/Ronide-Photo-52.png" alt="Événement À Venir" class="stack-card back-1" />
-          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Main Highlight Event" class="stack-card main-front" />
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement Passé" class="stack-card back-2" />
-          <img src="./images/Ronide-Photo-52.png" alt="Événement À Venir" class="stack-card back-1" />
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Main Highlight Event" class="stack-card main-front" />
+        
+        <!-- Conteneur de la pile (Ajout d'un ID pour le JavaScript) -->
+        <div class="image-stack-container" id="eventStack" style="cursor: pointer;">
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement" class="stack-card back-2" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement" class="stack-card back-1" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement Principal" class="stack-card main-front" />
         </div>
+        
         <div class="events-text">
           <span class="eyebrow">Parcours & Rencontres</span>
           <h2 class="section-title">Événements & Conférences</h2>
