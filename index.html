@@ -653,6 +653,56 @@
       .marquee-track {
         gap: 3rem;
       }
+
+      /* 1. Le conteneur masque ce qui dépasse de l'écran */
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  user-select: none;
+  background-color: transparent; /* Ajoute un fond si nécessaire */
+  padding: 20px 0;
+}
+
+/* 2. La piste doit faire DEUX FOIS la largeur nécessaire et s'aligner en ligne */
+.marquee-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 40px; /* Espace entre chaque logo */
+  width: max-content;
+  /* L'animation appelle "scroll-marquee", dure 20s, est linéaire et infinie */
+  animation: scroll-marquee 25s linear infinite;
+}
+
+/* Évite les saccades au survol (optionnel : met l'animation en pause) */
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* 3. Style de base pour tes logos pour s'assurer qu'ils gardent leur taille */
+.partner-logo {
+  flex-shrink: 0;
+  display: block;
+}
+
+.partner-logo img {
+  height: 50px; /* Ajuste la hauteur de tes logos ici */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* 4. LA CLÉ DE LA BOUCLE INFINIE : On translate à -50% précisément */
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* -50% correspond exactement à la moitié de la piste (la première série de logos) */
+    transform: translateX(-50%);
+  }
+}
     }
   </style>
 </head>
@@ -660,7 +710,7 @@
 <body>
   <header>
     <nav class="container">
-      <a href="#" class="logo">Ronide Casséus</a>
+      <a href="#" class="logo">〶 Ronide Casséus 〶</a>
       <ul class="nav-links">
         <li><a href="#home">Accueil</a></li>
         <li><a href="#about">À Propos</a></li>
@@ -697,9 +747,10 @@
       <div class="about-grid">
         <div class="about-text">
           <span class="eyebrow">À Propos</span>
-          <h2 class="section-title">Ronide Casséus</h2>
+          <h2 class="section-title">〶 Ronide Casséus 〶</h2>
           <div class="gold-line"></div>
-          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL et conférencière, Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
+          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL et conférencière, 
+            Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
           <p>Son approche allie rigueur, profondeur émotionnelle et respect, créant un espace sécuritaire pour un travail d'introspection significatif.</p>
         </div>
         <div class="about-image-wrapper">
@@ -730,7 +781,8 @@
           <div style="font-size: 2rem; color: var(--gold); margin-bottom: 1rem;">⚙</div>
           <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 700;">Le Coaching PNL Intentionnel</h3>
           <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7;">
-            La Programmation Neuro-Linguistique (PNL) est une approche orientée vers les solutions. Elle étudie vos schémas de pensée, vos comportements et vos modes de communication pour reprogrammer ce qui vous freine.
+            La Programmation Neuro-Linguistique (PNL) est une approche orientée vers les solutions. Elle étudie vos schémas de pensée, 
+            vos comportements et vos modes de communication pour reprogrammer ce qui vous freine.
           </p>
         </div>
 
@@ -738,7 +790,8 @@
           <div style="font-size: 2rem; color: var(--gold); margin-bottom: 1rem;">🎙</div>
           <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 700;">Une Conférencière d'Impact</h3>
           <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7;">
-            Sur scène, Ronide Casséus transmet une énergie et un vécu hors du commun. À travers des partages authentiques et des outils concrets, ses conférences agissent comme un catalyseur collectif éveillant la résilience.
+            Sur scène, Ronide Casséus transmet une énergie et un vécu hors du commun. À travers des partages authentiques et des outils concrets, 
+            ses conférences agissent comme un catalyseur collectif éveillant la résilience.
           </p>
         </div>
       </div>
@@ -754,7 +807,7 @@
       <p style="color: var(--gray); max-width: 600px; margin: 0 auto 2.5rem; font-size: 1.1rem;">
         Sélectionnez le moment qui vous convient le mieux directement dans mon calendrier Google pour commencer votre accompagnement personnalisé.
       </p>
-      <!-- REMPLACEZ LE LIEN CI-DESSOUS PAR VOTRE LIEN DE PARTAGE GOOGLE CALENDAR (OU CALENDLY) -->
+      <!-- LIEN DE PARTAGE GOOGLE CALENDAR -->
       <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ14_qPX-4RSuGyOeZ8QCopcYqZnkSQiadbD_PJhbPigA0OZ_-eVofvBP3eDfKWJyacUWR2Xg4ET" target="_blank" rel="noopener noreferrer" 
         class="btn btn-primary">
         Choisissez vos heures
@@ -775,24 +828,27 @@
       </div>
 
       <div class="payment-grid">
-        <!-- Formule 1 -->
+        <!-- Gauche -->
         <div class="payment-card">
           <h3>Séance Initiale</h3>
           <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">Clarté &amp; Analyse des besoins</p>
           <div class="price">150 $</div>
           <p style="color: var(--gray); margin-bottom: 2rem; min-height: 50px;">Une séance intensive d'une heure pour fixer vos objectifs et initier le changement.</p>
-          <!-- LIEN DE PAIEMENT EXPANSIBLE (Ex: Stripe, PayPal ou facture) -->
-          <a href="https://book.stripe.com/3cI00kghJ94YbAwfkjcfK00" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">Régler la séance</a>
+          <!-- LIEN DE PAIEMENT EXPANSIBLE (Stripe) -->
+          <a href="https://book.stripe.com/3cI00kghJ94YbAwfkjcfK00" 
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">Régler la séance</a>
         </div>
 
-        <!-- Formule 2 -->
+        <!-- Droite -->
         <div class="payment-card" style="border-color: rgba(201, 168, 76, 0.3);">
           <span style="font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; font-weight: 600;">Recommandé</span>
           <h3 style="margin-top: 0.5rem;">Accompagnement Privé</h3>
           <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">Forfait transformation intentionnelle</p>
           <div class="price">675 $</div>
           <p style="color: var(--gray); margin-bottom: 2rem; min-height: 50px;">Cycle complet de 5 séances de coaching PNL personnalisé pour ancrer la maturité.</p>
-          <a href="https://book.stripe.com/6oUbJ2d5x94Y484dcbcfK01" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Acheter le forfait</a>
+           <!-- LIEN DE PAIEMENT EXPANSIBLE (Stripe) -->
+          <a href="https://book.stripe.com/6oUbJ2d5x94Y484dcbcfK01" 
+            target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Acheter le forfait</a>
         </div>
       </div>
     </div>
@@ -807,36 +863,36 @@
       <div class="marquee-track">
         <!-- Remplacer les '#' par les vrais sites de vos partenaires et les images par vos logos -->
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
           <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 3" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
           <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 5" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" title="Visiter RoMEDIA" />
         </a>
 
         <!-- DUPLICATION DES LOGOS (Obligatoire pour l'effet de boucle infinie sans coupure) -->
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
           <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 3" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
           <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" title="Visiter RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 5" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" title="Visiter RoMEDIA" />
         </a>
       </div>
     </div>
