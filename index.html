@@ -1,70 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ronide Casséus | Maturité</title>
-  <meta name="description" content="Woman-owned, Black-owned coaching helping people grow into maturity, clarity, and their fullest selves through intentional self-work." />
+  <meta name="description" content="Coaching certifié PNL à Montréal aidant les personnes à grandir vers la maturité, la clarté et leur plein potentiel grâce à un travail sur soi intentionnel." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  
-<body>
-  <header>
-    <nav class="container">
-      <a href="#" class="logo">Ronide Casséus<span>♕</span></a>
-      <ul class="nav-links">
-        <li><a href="#home">Acceuil</a></li>
-      </ul>
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-      </button>
-    </nav>
-  </header>
-
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-eyebrow">Coach certifié PNL</div>
-        <h1>Deviens cette personne que tu devrais <em>être.</em></h1>
-        <p>Coaching pour les personnes prêtes à entreprendre un véritable travail sur elles-mêmes — développer la maturité, la clarté, la profondeur émotionnelle et le courage de vivre avec intention.</p>
-        <div class="cta-group">
-          <a href="#contact" class="btn btn-primary">Commencez votre voyage</a>
-          <a href="https://surl.li/bplmuj" class="btn btn-outline" rel="noopener noreferrer">Réservez votre moment</a>
-        </div>
-      </div>
-      <div class="hero-badge">
-        <span></span>
-        Maturité. Clarté. Pouvoir.
-      </div>
-    </div>
-  </section>
-
-  
-
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <h2>Ronide Casséus<span>♕</span></h2>
-          <p>L'art pour se faire entendre.</p>
-        </div>
-        <div class="footer-contact">
-          <h4>Commençons</h4>
-          <a href="mailto:ronidecasseus@gmail.com"><span>✉</span>ronidecasseus@gmail.com</a>
-          <a href="tel:+15145889168"><span>✆</span>(514) 588-9168</a>
-          <a href="https://surl.li/bplmuj" rel="noopener noreferrer">Réservez votre consultation</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 © Ronide Casséus. Tous droits réservés.</span>
-        <span>Créer avec intention.</span>
-      </div>
-    </div>
-  </footer>
-</body>
-  
-  
   
   <style>
     :root {
@@ -118,12 +61,14 @@
     }
 
     /* Typography */
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       font-family: var(--font-display);
-      font-weight: 800;
       line-height: 1.1;
       letter-spacing: -0.01em;
     }
+
+    h1 { font-weight: 700; }
+    h2 { font-weight: 800; }
 
     .eyebrow {
       font-family: var(--font-body);
@@ -139,6 +84,7 @@
     .section-title {
       font-size: clamp(2.2rem, 5vw, 3.5rem);
       color: var(--white);
+      margin-bottom: 2rem;
     }
 
     /* Header */
@@ -360,7 +306,180 @@
       display: inline-block;
     }
 
-   
+    /* About Section */
+    .about {
+      padding: 100px 0;
+      background-color: var(--charcoal);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-img-link {
+      display: block;
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .about-img-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .about-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .about-img-overlay span {
+      color: var(--gold);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-img-overlay p {
+      color: var(--white);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .about-img-link:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-img-link:hover .about-img-overlay {
+      opacity: 1;
+    }
+
+    /* Beyond Coaching Section (New) */
+    .beyond-coaching {
+      padding: 100px 0;
+      background-color: var(--black);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .beyond-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .beyond-card {
+      background: var(--charcoal);
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+
+    .beyond-card h3 {
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    .beyond-card p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .beyond-quote {
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--white) !important;
+      font-family: var(--font-display);
+      font-size: 1.25rem !important;
+    }
+
+    /* Events Section */
+    .events {
+      padding: 100px 0;
+      background-color: var(--charcoal);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .events-text p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .image-stack-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 480px;
+      margin: 0 auto;
+    }
+
+    .stack-card {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 4px solid var(--charcoal);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      transition: transform 0.4s ease;
+    }
+
+    .stack-card.back-2 {
+      transform: rotate(-6deg) translate(-15px, -10px);
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .stack-card.back-1 {
+      transform: rotate(4deg) translate(10px, 5px);
+      z-index: 2;
+      opacity: 0.8;
+    }
+
+    .stack-card.main-front {
+      transform: rotate(-1deg);
+      z-index: 3;
+    }
+
+    .image-stack-container:hover .stack-card.main-front {
+      transform: rotate(0deg) scale(1.02);
+    }
 
     /* Footer */
     footer {
@@ -429,35 +548,28 @@
       letter-spacing: 0.1em;
     }
 
-    .footer-bottom a:hover {
-      color: var(--gold);
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-menu-toggle {
-        display: flex;
-      }
-
-      .hero {
-        padding-top: 100px;
+      .nav-links { display: none; }
+      .mobile-menu-toggle { display: flex; }
+      .hero { padding-top: 100px; text-align: center; }
+      .hero-eyebrow { justify-content: center; }
+      .hero-eyebrow::before { display: none; }
+      .cta-group { justify-content: center; }
+      
+      .about-grid, .beyond-grid, .events-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
         text-align: center;
       }
 
-      .hero-eyebrow {
-        justify-content: center;
-      }
+      .about-grid { direction: rtl; }
+      .about-text, .about-img-link { direction: ltr; }
+      .beyond-card { text-align: left; }
 
-      .hero-eyebrow::before {
-        display: none;
-      }
-
-      .cta-group {
-        justify-content: center;
+      .image-stack-container {
+        height: 400px;
+        max-width: 320px;
       }
 
       .footer-inner {
@@ -467,19 +579,132 @@
       }
     }
 
-    /* Decorative gold underline */
     .gold-line {
       width: 80px;
       height: 2px;
       background: var(--gold);
       margin: 1.5rem 0;
     }
-
-    .center-line {
-      margin-left: auto;
-      margin-right: auto;
-    }
   </style>
 </head>
 
+<body>
+  <header>
+    <nav class="container">
+      <a href="#" class="logo">Ronide Casséus<span>♕</span></a>
+      <ul class="nav-links">
+        <li><a href="#home">Accueil</a></li>
+        <li><a href="#about">À Propos</a></li>
+        <li><a href="#engagement">Engagement</a></li>
+        <li><a href="#events">Événements</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Coach certifié PNL</div>
+        <h1>Deviens cette personne que tu devrais <em>être.</em></h1>
+        <p>Coaching pour les personnes prêtes à entreprendre un véritable travail sur elles-mêmes — développer la maturité, la clarté, la profondeur émotionnelle et le courage de vivre avec intention.</p>
+        <div class="cta-group">
+          <a href="#contact" class="btn btn-primary">Commencez votre voyage</a>
+          <a href="https://surl.li/bplmuj" target="_blank" class="btn btn-outline" rel="noopener noreferrer">Réservez votre moment</a>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <span></span>
+        Maturité. Clarté. Pouvoir.
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <span class="eyebrow">À Propos</span>
+          <h2 class="section-title">Ronide Casséus</h2>
+          <div class="gold-line"></div>
+          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL, Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
+          <p>Son approche allie rigueur, profondeur émotionnelle et respect, créant un espace sécuritaire pour un travail d'introspection significatif.</p>
+        </div>
+        <div class="about-image-wrapper">
+          <a href="https://www.facebook.com/YOUR_FACEBOOK_PAGE_URL" target="_blank" rel="noopener noreferrer" class="about-img-link">
+            <img src="https://via.placeholder.com/450x560" alt="Ronide Casséus" />
+            <div class="about-img-overlay">
+              <p>Voir mon profil Facebook</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beyond-coaching" id="engagement">
+    <div class="container">
+      <span class="eyebrow">Au-delà du Coaching</span>
+      <h2 class="section-title">Racines & Résilience à Montréal</h2>
+      <div class="gold-line"></div>
+      
+      <div class="beyond-grid">
+        <div class="beyond-card">
+          <h3>20 ans d'ancrage communautaire</h3>
+          <p>Bien avant de guider ses clients en cabinet, Ronide a consacré plus de deux décennies de sa vie au terrain à Montréal-Nord. Intervenante dévouée, elle a travaillé sans relâche auprès des jeunes et de leurs familles pour bâtir des ponts, offrir du soutien et inspirer les générations futures à s'élever au-dessus des obstacles.</p>
+        </div>
+
+        <div class="beyond-card">
+          <h3>Transformer l'épreuve en lumière</h3>
+          <p>En août 2022, la vie de Ronide a été bouleversée par la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
+          <p class="beyond-quote">« C'était mon enfant, mais c'était aussi mon meilleur ami et mon confident. On était une équipe. »</p>
+          <p>Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), transformant sa propre résilience en une boussole pour ceux qui traversent les tempêtes les plus sombres de l'existence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="events" id="events">
+    <div class="container">
+      <div class="events-grid">
+        <div class="image-stack-container">
+          <img src="https://via.placeholder.com/400x480/222/fff?text=Engagement" alt="Événement Passé" class="stack-card back-2" />
+          <img src="https://via.placeholder.com/400x480/333/fff?text=Commémoration" alt="Événement À Venir" class="stack-card back-1" />
+          <img src="https://via.placeholder.com/400x480/c9a84c/000?text=Conférence" alt="Main Highlight Event" class="stack-card main-front" />
+        </div>
+        <div class="events-text">
+          <span class="eyebrow">Parcours & Rencontres</span>
+          <h2 class="section-title">Événements & Conférences</h2>
+          <div class="gold-line"></div>
+          <p>Présente lors de grands rassemblements inspirants, Ronide partage sa vision de l'alignement personnel et de la maturité émotionnelle à travers des ateliers interactifs et des interventions marquantes.</p>
+          <p>Restez à l'affût des prochains ateliers immersifs et des masterclasses prévues pour vous aider à cultiver votre espace de puissance interne.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h2>Ronide Casséus<span>♕</span></h2>
+          <p>L'art pour se faire entendre.</p>
+        </div>
+        <div class="footer-contact">
+          <h4>Commençons</h4>
+          <a href="mailto:ronidecasseus@gmail.com"><span>✉</span>ronidecasseus@gmail.com</a>
+          <a href="tel:+15145889168"><span>✆</span>(514) 588-9168</a>
+          <a href="https://surl.li/bplmuj" target="_blank" rel="noopener noreferrer">Réservez votre consultation</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Ronide Casséus. Tous droits réservés.</span>
+        <span>Créer avec intention.</span>
+      </div>
+    </div>
+  </footer>
+</body>
 </html>
