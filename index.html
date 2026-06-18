@@ -42,6 +42,7 @@
       color: var(--ivory);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     img {
@@ -61,7 +62,7 @@
       padding: 0 20px;
     }
 
-    /* Typographie */
+    /* Typographie global */
     h1, h2, h3, h4 {
       font-family: var(--font-display);
       line-height: 1.1;
@@ -88,6 +89,31 @@
       margin-bottom: 2rem;
     }
 
+    .gold-line {
+      width: 80px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    .center-title {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .center-title .gold-line {
+      margin: 1.5rem auto;
+    }
+
+    .quote-hero {
+      color: var(--white);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
     /* En-tête */
     header {
       position: fixed;
@@ -97,6 +123,7 @@
       z-index: 1000;
       background: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -149,14 +176,40 @@
       width: 100%;
     }
 
+    /* Bouton Menu Mobile (Burger) */
     .mobile-menu-toggle {
       display: none;
       flex-direction: column;
-      gap: 5px;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 8px;
+      z-index: 1100;
+    }
+
+    .mobile-menu-toggle span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      transition: all 0.3s ease;
+    }
+
+    /* Animation du burger actif */
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Sections Générales */
+    section {
+      padding: 100px 0;
     }
 
     /* Hero */
@@ -246,7 +299,6 @@
       cursor: pointer;
       transition: all 0.35s ease;
       position: relative;
-      overflow: hidden;
     }
 
     .btn-primary {
@@ -296,7 +348,6 @@
 
     /* À Propos */
     .about {
-      padding: 100px 0;
       background-color: var(--charcoal);
     }
 
@@ -339,7 +390,6 @@
       height: 100%;
       background: rgba(10, 10, 10, 0.75);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       opacity: 0;
@@ -362,19 +412,72 @@
       opacity: 1;
     }
 
-    /* Section Réservation & Calendrier */
+    /* Approche */
+    .approche {
+      background-color: var(--charcoal);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .approche-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .approche-card {
+      background: var(--black);
+      padding: 3rem 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .approche-card .icon {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .approche-card h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .approche-card p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* Réservation */
     .scheduling-section {
-      padding: 100px 0;
       background-color: var(--black);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       text-align: center;
     }
 
-    /* Section Paiement */
+    .scheduling-section p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Paiement */
     .payment-section {
-      padding: 100px 0;
       background-color: var(--charcoal);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .payment-text-wrapper {
+      text-align: center;
+    }
+
+    .payment-text-wrapper p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .payment-grid {
@@ -389,12 +492,23 @@
       padding: 3rem 2rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .payment-card:hover {
       transform: translateY(-5px);
       border-color: var(--gold);
+    }
+
+    .payment-card h3 {
+      font-size: 1.6rem;
+      color: var(--white);
+    }
+
+    .payment-card .sub-plan {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
     }
 
     .price {
@@ -404,97 +518,71 @@
       margin: 1.5rem 0;
       font-weight: 700;
     }
- /* Grille responsive */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .mobile-menu-toggle { display: flex; }
-      .hero { padding-top: 100px; text-align: center; }
-      .hero-eyebrow { justify-content: center; }
-      .hero-eyebrow::before { display: none; }
-      .cta-group { justify-content: center; }
-      
-      .about-grid, .beyond-grid, .events-grid {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-        text-align: center;
-      }
 
-      .about-grid { direction: rtl; }
-      .about-text, .about-img-link { direction: ltr; }
-      .beyond-card { text-align: left; }
+    .payment-card .plan-desc {
+      color: var(--gray);
+      margin-bottom: 2rem;
+      min-height: 50px;
+    }
 
-      .image-stack-container {
-        height: 400px;
-        max-width: 320px;
-      }
+    /* Carrousel infini des partenaires */
+    .partners-section {
+      padding: 60px 0;
+      background-color: var(--black);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .partners-section .container {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
 
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-      }
+    .marquee-container {
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      user-select: none;
+      background-color: transparent;
+      padding: 20px 0;
+    }
 
-      .approche-grid {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-      }
-      .marquee-track {
-        gap: 3rem;
-      }
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      width: max-content;
+      animation: scroll-marquee 25s linear infinite;
+    }
 
-      /* 1. Le conteneur masque ce qui dépasse de l'écran */
-.marquee-container {
-  overflow: hidden;
-  width: 100%;
-  display: flex;
-  user-select: none;
-  background-color: transparent; /* Ajoute un fond si nécessaire */
-  padding: 20px 0;
-}
+    .marquee-container:hover .marquee-track {
+      animation-play-state: paused;
+    }
 
-/* 2. La piste doit faire DEUX FOIS la largeur nécessaire et s'aligner en ligne */
-.marquee-track {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 40px; /* Espace entre chaque logo */
-  width: max-content;
-  /* L'animation appelle "scroll-marquee", dure 20s, est linéaire et infinie */
-  animation: scroll-marquee 25s linear infinite;
-}
+    .partner-logo {
+      flex-shrink: 0;
+      display: block;
+    }
 
-/* Défilement partenaire - Évite les saccades au survol (optionnel : met l'animation en pause) */
-.marquee-container:hover .marquee-track {
-  animation-play-state: paused;
-}
+    .partner-logo img {
+      height: 50px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(0.8);
+      transition: filter 0.3s ease;
+    }
 
-/* 3. Style de base pour tes logos pour s'assurer qu'ils gardent leur taille */
-.partner-logo {
-  flex-shrink: 0;
-  display: block;
-}
+    .partner-logo img:hover {
+      filter: grayscale(0%) brightness(1);
+    }
 
-.partner-logo img {
-  height: 50px; /* Ajuste la hauteur de tes logos ici */
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
-
-/* 4. LA CLÉ DE LA BOUCLE INFINIE : On translate à -50% précisément */
-@keyframes scroll-marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* -50% correspond exactement à la moitié de la piste (la première série de logos) */
-    transform: translateX(-50%);
-  }
-}
+    @keyframes scroll-marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     /* Au-delà du Coaching */
     .beyond-coaching {
-      padding: 100px 0;
       background-color: var(--charcoal);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -510,7 +598,6 @@
       background: var(--black);
       padding: 2.5rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
     }
 
     .beyond-card h3 {
@@ -537,7 +624,6 @@
 
     /* Événements */
     .events {
-      padding: 100px 0;
       background-color: var(--black);
     }
 
@@ -633,21 +719,113 @@
       color: var(--gray);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      width: 100%;
     }
 
-    .gold-line {
-      width: 80px;
-      height: 2px;
-      background: var(--gold);
-      margin: 1.5rem 0;
+    .footer-links a {
+      color: #a0a0a0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      margin-left: 15px;
     }
 
-    .approche-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+    .footer-links a:hover {
+      color: var(--white);
+      text-decoration: underline;
     }
-  }
+
+    /* 📱 DESIGN RESPONSIVE (Max 768px) */
+    @media (max-width: 768px) {
+      section {
+        padding: 60px 0;
+      }
+      
+      .mobile-menu-toggle { 
+        display: flex; 
+      }
+
+      /* Navigation Mobile tiroir */
+      .nav-links { 
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.2rem;
+      }
+
+      .hero { 
+        padding-top: 100px; 
+        text-align: center; 
+      }
+      
+      .hero-eyebrow { 
+        justify-content: center; 
+      }
+      
+      .hero-eyebrow::before { 
+        display: none; 
+      }
+      
+      .cta-group { 
+        justify-content: center; 
+      }
+
+      .about-grid, .beyond-grid, .events-grid, .approche-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+      }
+
+      /* Inversion visuelle propre pour le bloc à propos sur mobile */
+      .about-grid { 
+        direction: rtl; 
+      }
+      .about-text, .about-img-link { 
+        direction: ltr; 
+      }
+      
+      .beyond-card, .approche-card { 
+        text-align: left; 
+      }
+
+      .image-stack-container {
+        height: 380px;
+        max-width: 300px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .footer-links a {
+        margin: 0 8px;
+      }
+    }
   </style>
 </head>
 
@@ -655,7 +833,7 @@
   <header>
     <nav class="container">
       <a href="#" class="logo">〶 Ronide Casséus 〶</a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#home">Accueil</a></li>
         <li><a href="#about">À Propos</a></li>
         <li><a href="#approche">Approche</a></li>
@@ -665,7 +843,11 @@
         <li><a href="#events">Événements</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="mobile-menu-toggle" aria-label="Ouvrir le menu"></button>
+      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   </header>
 
@@ -693,8 +875,7 @@
           <span class="eyebrow">À Propos</span>
           <h2 class="section-title">〶 Ronide Casséus 〶</h2>
           <div class="gold-line"></div>
-          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL et conférencière, 
-            Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
+          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL et conférencière, Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
           <p>Son approche allie rigueur, profondeur émotionnelle et respect, créant un espace sécuritaire pour un travail d'introspection significatif.</p>
         </div>
         <div class="about-image-wrapper">
@@ -709,134 +890,110 @@
     </div>
   </section>
 
-  <section class="approche" id="approche" style="padding: 100px 0; background-color: var(--charcoal); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+  <section class="approche" id="approche">
     <div class="container">
-      <div style="text-align: center; margin-bottom: 4rem;">
+      <div class="center-title">
         <span class="eyebrow">Une Double Expertise</span>
         <h2 class="section-title">Coaching PNL &amp; Conférences</h2>
-        <div class="gold-line" style="margin: 1.5rem auto;"></div>
-        <p style="color: var(--white); font-size: clamp(1.1rem, 2vw, 1.35rem); max-width: 800px; margin: 0 auto; font-family: var(--font-display); font-style: italic;">
+        <div class="gold-line"></div>
+        <p class="quote-hero">
           « Peu importe votre point de départ, votre profession ou les épreuves traversées : s'allier à Ronide Casséus, c'est s'offrir le déclic nécessaire pour transformer sa réalité. »
         </p>
       </div>
 
       <div class="approche-grid">
-        <div class="approche-card" style="background: var(--black); padding: 3rem 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05);">
-          <div style="font-size: 2rem; color: var(--gold); margin-bottom: 1rem;">⚙</div>
-          <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 700;">Le Coaching PNL Intentionnel</h3>
-          <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7;">
-            La Programmation Neuro-Linguistique (PNL) est une approche orientée vers les solutions. Elle étudie vos schémas de pensée, 
-            vos comportements et vos modes de communication pour reprogrammer ce qui vous freine.
-          </p>
+        <div class="approche-card">
+          <div class="icon">⚙</div>
+          <h3>Le Coaching PNL Intentionnel</h3>
+          <p>La Programmation Neuro-Linguistique (PNL) est une approche orientée vers les solutions. Elle étudie vos schémas de pensée, vos comportements et vos modes de communication pour reprogrammer ce qui vous freine.</p>
         </div>
 
-        <div class="approche-card" style="background: var(--black); padding: 3rem 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05);">
-          <div style="font-size: 2rem; color: var(--gold); margin-bottom: 1rem;">🎙</div>
-          <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 700;">Une Conférencière d'Impact</h3>
-          <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.7;">
-            Sur scène, Ronide Casséus transmet une énergie et un vécu hors du commun. À travers des partages authentiques et des outils concrets, 
-            ses conférences agissent comme un catalyseur collectif éveillant la résilience.
-          </p>
+        <div class="approche-card">
+          <div class="icon">🎙</div>
+          <h3>Une Conférencière d'Impact</h3>
+          <p>Sur scène, Ronide Casséus transmet une énergie et un vécu hors du commun. À travers des partages authentiques et des outils concrets, ses conférences agissent comme un catalyseur collectif éveillant la résilience.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION RÉSERVATION (LIEN GOOGLE CALENDAR) -->
   <section class="scheduling-section" id="reservation">
     <div class="container">
       <span class="eyebrow">Planification</span>
       <h2 class="section-title">Prendre un rendez-vous</h2>
       <div class="gold-line" style="margin: 1.5rem auto;"></div>
-      <p style="color: var(--gray); max-width: 600px; margin: 0 auto 2.5rem; font-size: 1.1rem;">
-        Sélectionnez le moment qui vous convient le mieux directement dans mon calendrier Google pour commencer votre accompagnement personnalisé.
-      </p>
-      <!-- LIEN DE PARTAGE GOOGLE CALENDAR -->
-      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ14_qPX-4RSuGyOeZ8QCopcYqZnkSQiadbD_PJhbPigA0OZ_-eVofvBP3eDfKWJyacUWR2Xg4ET" target="_blank" rel="noopener noreferrer" 
-        class="btn btn-primary">
+      <p>Sélectionnez le moment qui vous convient le mieux directement dans mon calendrier Google pour commencer votre accompagnement personnalisé.</p>
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ14_qPX-4RSuGyOeZ8QCopcYqZnkSQiadbD_PJhbPigA0OZ_-eVofvBP3eDfKWJyacUWR2Xg4ET" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
         Choisissez vos heures
       </a>
     </div>
   </section>
 
-  <!-- SECTION PAIEMENT -->
   <section class="payment-section" id="paiement">
     <div class="container">
-      <div style="text-align: center;">
+      <div class="payment-text-wrapper">
         <span class="eyebrow">Investissement sur soi</span>
         <h2 class="section-title">Séances &amp; Règlements</h2>
         <div class="gold-line" style="margin: 1.5rem auto;"></div>
-        <p style="color: var(--gray); max-width: 600px; margin: 0 auto;">
-          Choisissez la formule adaptée à votre parcours et effectuez votre versement en toute sécurité avant notre rencontre.
-        </p>
+        <p>Choisissez la formule adaptée à votre parcours et effectuez votre versement en toute sécurité avant notre rencontre.</p>
       </div>
 
       <div class="payment-grid">
-        <!-- Gauche -->
         <div class="payment-card">
           <h3>Séance Initiale</h3>
-          <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">Clarté &amp; Analyse des besoins</p>
+          <p class="sub-plan">Clarté &amp; Analyse des besoins</p>
           <div class="price">150 $</div>
-          <p style="color: var(--gray); margin-bottom: 2rem; min-height: 50px;">Une séance intensive d'une heure pour fixer vos objectifs et initier le changement.</p>
-          <!-- LIEN DE PAIEMENT EXPANSIBLE (Stripe) -->
-          <a href="https://book.stripe.com/3cI00kghJ94YbAwfkjcfK00" 
-            target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">Régler la séance</a>
+          <p class="plan-desc">Une séance intensive d'une heure pour fixer vos objectifs et initier le changement.</p>
+          <a href="https://book.stripe.com/3cI00kghJ94YbAwfkjcfK00" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">Régler la séance</a>
         </div>
 
-        <!-- Droite -->
         <div class="payment-card" style="border-color: rgba(201, 168, 76, 0.3);">
           <span style="font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; font-weight: 600;">Recommandé</span>
           <h3 style="margin-top: 0.5rem;">Accompagnement Privé</h3>
-          <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">Forfait transformation intentionnelle</p>
+          <p class="sub-plan">Forfait transformation intentionnelle</p>
           <div class="price">675 $</div>
-          <p style="color: var(--gray); margin-bottom: 2rem; min-height: 50px;">Cycle complet de 5 séances de coaching PNL personnalisé pour ancrer la maturité.</p>
-           <!-- LIEN DE PAIEMENT EXPANSIBLE (Stripe) -->
-          <a href="https://book.stripe.com/6oUbJ2d5x94Y484dcbcfK01" 
-            target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Acheter le forfait</a>
+          <p class="plan-desc">Cycle complet de 5 séances de coaching PNL personnalisé pour ancrer la maturité.</p>
+          <a href="https://book.stripe.com/6oUbJ2d5x94Y484dcbcfK01" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Acheter le forfait</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION CARROUSEL DÉFILANT INFINI DE PARTENAIRES -->
   <section class="partners-section">
-    <div class="container" style="margin-bottom: 1.5rem; text-align: center;">
+    <div class="container">
       <span class="eyebrow" style="margin-bottom: 0;">Ils me font confiance</span>
     </div>
     <div class="marquee-container">
       <div class="marquee-track">
-        <!-- Remplacer les '#' par les vrais sites de vos partenaires et les images par vos logos -->
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" title="Visiter RoMEDIA" />
-        </a>
-
-        <!-- DUPLICATION DES LOGOS (Obligatoire pour l'effet de boucle infinie sans coupure) -->
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" />
         </a>
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" title="Visiter RoMEDIA" />
+          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" />
+        </a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
+          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" />
         </a>
       </div>
     </div>
@@ -858,7 +1015,7 @@
           <h3>Transformer l'épreuve en lumière</h3>
           <p>En août 2022, la vie de Ronide a été bouleversée par la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
           <p class="beyond-quote">« C'était mon enfant, mais c'était aussi mon meilleur ami et mon confident. On était une équipe. »</p>
-          <p>Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), transformant sa propre résilience en boussole.</p>
+          <p style="margin-top: 1.5rem;">Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), transformant sa propre résilience en boussole.</p>
         </div>
       </div>
     </div>
@@ -907,52 +1064,37 @@
       </div>
       <div class="footer-bottom">
         <span>Créer avec intention.</span>
-        <div class="footer-content">
         <p>&copy; 2026 Ronide Casséus. Tous droits réservés.</p>
         <div class="footer-links">
-            <a href="legal.html">Mentions légales & Confidentialité</a>
+          <a href="legal.html">Mentions légales & Confidentialité</a>
         </div>
       </div>
     </div>
-
-<style>
-/* Style de base pour un footer webmaster propre */
-footer {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    padding: 20px 10px;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-top: 60px;
-}
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-@media (min-width: 768px) {
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-.footer-links a {
-    color: #a0a0a0;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.footer-links a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-</style>
   </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      // Gestion Menu Mobile
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinksContainer = document.getElementById('navLinks');
+      const navLinks = document.querySelectorAll('#navLinks a');
+
+      if (menuToggle && navLinksContainer) {
+        menuToggle.addEventListener('click', function() {
+          menuToggle.classList.toggle('active');
+          navLinksContainer.classList.toggle('active');
+        });
+
+        // Fermer le menu lors du clic sur un lien
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            menuToggle.classList.remove('active');
+            navLinksContainer.classList.remove('active');
+          });
+        });
+      }
+
+      // Animation Pile d'images (Événements)
       const stack = document.getElementById('eventStack');
       if (stack) {
         const cards = Array.from(stack.querySelectorAll('.stack-card'));
@@ -986,12 +1128,12 @@ footer {
           });
         }
 
-        updateStack();
-
         stack.addEventListener('click', function() {
           currentIndex = (currentIndex + 1) % cards.length;
           updateStack();
         });
+
+        updateStack();
       }
     });
   </script>
