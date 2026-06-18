@@ -62,7 +62,7 @@
       padding: 0 20px;
     }
 
-    /* Typographie global */
+    /* Typographie globale */
     h1, h2, h3, h4 {
       font-family: var(--font-display);
       line-height: 1.1;
@@ -144,7 +144,7 @@
 
     .nav-links {
       display: flex;
-      gap: 2.2rem;
+      gap: 2.5rem;
       list-style: none;
       font-size: 0.85rem;
       font-weight: 500;
@@ -196,7 +196,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Animation du burger actif */
     .mobile-menu-toggle.active span:nth-child(1) {
       transform: translateY(8px) rotate(45deg);
     }
@@ -525,7 +524,7 @@
       min-height: 50px;
     }
 
-    /* Carrousel infini des partenaires */
+    /* 🔄 Carrousel infini de Partenaires corrigé */
     .partners-section {
       padding: 60px 0;
       background-color: var(--black);
@@ -540,18 +539,16 @@
     .marquee-container {
       overflow: hidden;
       width: 100%;
+      position: relative;
       display: flex;
-      user-select: none;
-      background-color: transparent;
-      padding: 20px 0;
     }
 
     .marquee-track {
       display: flex;
-      align-items: center;
-      gap: 60px;
       width: max-content;
-      animation: scroll-marquee 25s linear infinite;
+      white-space: nowrap;
+      gap: 80px; 
+      animation: scroll-marquee 20s linear infinite;
     }
 
     .marquee-container:hover .marquee-track {
@@ -559,14 +556,13 @@
     }
 
     .partner-logo {
+      display: inline-block;
       flex-shrink: 0;
-      display: block;
     }
 
     .partner-logo img {
       height: 50px;
       width: auto;
-      display: block;
       object-fit: contain;
       filter: grayscale(100%) brightness(0.8);
       transition: filter 0.3s ease;
@@ -578,7 +574,7 @@
 
     @keyframes scroll-marquee {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(-50%); } /* Boucle parfaite à la moitié exacte du contenu */
     }
 
     /* Au-delà du Coaching */
@@ -734,17 +730,43 @@
       text-decoration: underline;
     }
 
-    /* 📱 DESIGN RESPONSIVE (Max 768px) */
-    @media (max-width: 768px) {
-      section {
-        padding: 60px 0;
-      }
-      
-      .mobile-menu-toggle { 
-        display: flex; 
-      }
+    /* 🔼 Bouton Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--gold);
+      color: var(--black);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 2000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
 
-      /* Navigation Mobile tiroir */
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--gold-light);
+      transform: translateY(-3px);
+    }
+
+    /* 📱 RESPONSIVE (Max 768px) */
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .mobile-menu-toggle { display: flex; }
+
       .nav-links { 
         position: fixed;
         top: 80px;
@@ -757,74 +779,34 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 2rem;
+        gap: 2.5rem;
         transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         z-index: 999;
       }
 
-      .nav-links.active {
-        left: 0;
-      }
+      .nav-links.active { left: 0; }
+      .nav-links a { font-size: 1.4rem; }
 
-      .nav-links a {
-        font-size: 1.2rem;
-      }
+      .hero { padding-top: 100px; text-align: center; }
+      .hero-eyebrow { justify-content: center; }
+      .hero-eyebrow::before { display: none; }
+      .cta-group { justify-content: center; }
 
-      .hero { 
-        padding-top: 100px; 
-        text-align: center; 
-      }
+      .about-grid { direction: rtl; }
+      .about-text, .about-img-link { direction: ltr; }
       
-      .hero-eyebrow { 
-        justify-content: center; 
-      }
-      
-      .hero-eyebrow::before { 
-        display: none; 
-      }
-      
-      .cta-group { 
-        justify-content: center; 
-      }
-
       .about-grid, .beyond-grid, .events-grid, .approche-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
         text-align: center;
       }
-
-      /* Inversion visuelle propre pour le bloc à propos sur mobile */
-      .about-grid { 
-        direction: rtl; 
-      }
-      .about-text, .about-img-link { 
-        direction: ltr; 
-      }
       
-      .beyond-card, .approche-card { 
-        text-align: left; 
-      }
-
-      .image-stack-container {
-        height: 380px;
-        max-width: 300px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-      }
-      
-      .footer-links a {
-        margin: 0 8px;
-      }
+      .beyond-card, .approche-card { text-align: left; }
+      .image-stack-container { height: 380px; max-width: 300px; }
+      .footer-inner { flex-direction: column; text-align: center; align-items: center; }
+      .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+      .footer-links a { margin: 0 8px; }
+      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
     }
   </style>
 </head>
@@ -833,14 +815,11 @@
   <header>
     <nav class="container">
       <a href="#" class="logo">〶 Ronide Casséus 〶</a>
+      <!-- Menu épuré avec uniquement les 4 sections demandées -->
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">Accueil</a></li>
-        <li><a href="#about">À Propos</a></li>
-        <li><a href="#approche">Approche</a></li>
-        <li><a href="#reservation">Rendez-vous</a></li>
         <li><a href="#paiement">Tarifs</a></li>
-        <li><a href="#engagement">Engagement</a></li>
-        <li><a href="#events">Événements</a></li>
+        <li><a href="#reservation">Rendez-vous</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="mobile-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
@@ -980,6 +959,7 @@
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
           <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" />
         </a>
+        <!-- Duplication exacte requise pour le défilement infini fluide -->
         <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
           <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" />
         </a>
@@ -1013,9 +993,9 @@
 
         <div class="beyond-card">
           <h3>Transformer l'épreuve en lumière</h3>
-          <p>En août 2022, la vie de Ronide a été bouleversée par la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
+          <p>En août 2022, la vie de Ronide a été bouleversée by la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
           <p class="beyond-quote">« C'était mon enfant, mais c'était aussi mon meilleur ami et mon confident. On était une équipe. »</p>
-          <p style="margin-top: 1.5rem;">Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), transformant sa propre résilience en boussole.</p>
+          <p style="margin-top: 1.5rem;">Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), de sa propre résilience en boussole.</p>
         </div>
       </div>
     </div>
@@ -1072,9 +1052,12 @@
     </div>
   </footer>
 
+  <!-- Bouton Retour en haut -->
+  <div class="back-to-top" id="backToTop" title="Retour en haut">▲</div>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Gestion Menu Mobile
+      // Menu Mobile 
       const menuToggle = document.getElementById('menuToggle');
       const navLinksContainer = document.getElementById('navLinks');
       const navLinks = document.querySelectorAll('#navLinks a');
@@ -1085,7 +1068,6 @@
           navLinksContainer.classList.toggle('active');
         });
 
-        // Fermer le menu lors du clic sur un lien
         navLinks.forEach(link => {
           link.addEventListener('click', function() {
             menuToggle.classList.remove('active');
@@ -1094,7 +1076,24 @@
         });
       }
 
-      // Animation Pile d'images (Événements)
+      // Gestion visuelle du bouton Back To Top
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Gestion de la pile d'images (Événements)
       const stack = document.getElementById('eventStack');
       if (stack) {
         const cards = Array.from(stack.querySelectorAll('.stack-card'));
