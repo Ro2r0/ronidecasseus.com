@@ -116,3 +116,70 @@ Will have a blank line separating both lines
 1. First list item
    - First nested list item
      - Second nested list item
+100. First list item
+     - First nested list item
+       - Second nested list item
+
+- [x] #739
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
+
+- [ ] \(Optional) Open a followup issue
+
+___
+
+@github/support What do you think about these updates?
+
+:EMOJICODE:
+
+@octocat :+1: This PR looks great - it's ready to merge! :shipit:
+___________________
+
+Here is a simple footnote[^1].
+
+A footnote can also have multiple lines[^2].
+
+[^1]: My reference.
+[^2]: To add line breaks within a footnote, add 2 spaces to the end of a line.  
+This is a second line.
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+Let's rename \*our-new-project\* to \*our-old-project\*.
+
+<!-- This content will not appear in the rendered Markdown -->
+
+1.  List item one.
+
+    List item one continued with a second paragraph followed by an
+    Indented block.
+
+        $ ls *.sh
+        $ mv *.sh ~/tmp
+
+    List item continued with a third paragraph.
+
+2.  List item two continued with an open block.
+
+    This paragraph is part of the preceding list item.
+
+    1. This list is nested and does not require explicit item continuation.
+
+       This paragraph is part of the preceding list item.
+
+    2. List item b.
+
+    This paragraph belongs to item two of the outer list.
