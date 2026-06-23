@@ -11,15 +11,15 @@ __
 
 ## Emphasis
 
-**This is bold text**
+This is **bold text**
 
 __this is bold text__
 
 *This is italic text*
 
-_This is italic text_
+This is italic _text_
 
-~~This is line in text~~
+This is ~~line in text~~
 
 **This text is _extremely_ important**
 
