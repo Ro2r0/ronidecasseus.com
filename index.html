@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ronide Casséus | Maturité</title>
-  <link rel="icon" type="image/png" href="images/ronidewhite.png">
+  
+  <!-- Favicon SVG dynamique utilisant le symbole officiel -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>〶</text></svg>">
+  
   <meta name="description" content="Coaching certifié PNL à Montréal aidant les personnes à grandir vers la maturité, la clarté et leur plein potentiel grâce à un travail sur soi intentionnel." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -21,9 +25,10 @@
       --red: #9e1b1b;
       --red-soft: #b83a3a;
       --gray: #8a8a8a;
-      --radius: 2px;
+      --radius: 4px;
       --font-display: "Cormorant Garamond", Georgia, serif;
       --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
@@ -34,14 +39,16 @@
 
     html {
       scroll-behavior: smooth;
+      text-size-adjust: 100%;
     }
 
     body {
       font-family: var(--font-body);
       background-color: var(--black);
       color: var(--ivory);
-      line-height: 1.6;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
@@ -57,48 +64,62 @@
 
     .container {
       width: 90%;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 20px;
     }
 
-    /* Typographie globale */
+    /* Éléments d'apparition au scroll (Scroll-driven Reveal) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s var(--transition-smooth), transform 1.2s var(--transition-smooth);
+      will-change: transform, opacity;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Typographie */
     h1, h2, h3, h4 {
       font-family: var(--font-display);
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.01em;
     }
 
     h1 { font-weight: 700; }
-    h2 { font-weight: 800; }
+    h2 { font-weight: 700; }
 
     .eyebrow {
       font-family: var(--font-body);
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       color: var(--gold);
       display: block;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .section-title {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       color: var(--white);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .gold-line {
-      width: 80px;
-      height: 2px;
+      width: 60px;
+      height: 1px;
       background: var(--gold);
       margin: 1.5rem 0;
+      opacity: 0.7;
     }
 
     .center-title {
       text-align: center;
-      margin-bottom: 4rem;
+      max-width: 750px;
+      margin: 0 auto 5rem;
     }
     
     .center-title .gold-line {
@@ -107,162 +128,91 @@
 
     .quote-hero {
       color: var(--white);
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
-      max-width: 800px;
-      margin: 0 auto;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       font-family: var(--font-display);
       font-style: italic;
+      line-height: 1.5;
+      margin-top: 2rem;
     }
 
-    /* En-tête */
+    /* En-tête minimalist - Logo au plein milieu unique */
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      height: 80px;
+      justify-content: center;
+      height: 90px;
     }
 
     .logo {
       font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      font-weight: 400;
       color: var(--white);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.05em;
+      transition: opacity 0.3s ease;
+    }
+    
+    .logo:hover {
+      opacity: 0.8;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .nav-links a {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--gold);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Bouton Menu Mobile (Burger) */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 26px;
-      height: 18px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 1100;
-    }
-
-    .mobile-menu-toggle span {
-      width: 100%;
-      height: 2px;
-      background-color: var(--white);
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
-    }
-
-    /* Sections Générales */
+    /* Sections Structurées */
     section {
-      padding: 100px 0;
+      padding: 140px 0;
+      position: relative;
     }
 
-    /* Hero */
+    /* Hero unique centré et immersif */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding-top: 80px;
+      justify-content: center;
+      text-align: center;
+      padding-top: 90px;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 70% 30%, rgba(201, 168, 76, 0.12), transparent 45%),
-                  radial-gradient(circle at 20% 80%, rgba(158, 27, 27, 0.08), transparent 40%);
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(201, 168, 76, 0.08), transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(158, 27, 27, 0.04), transparent 40%);
       pointer-events: none;
     }
 
     .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
+      max-width: 850px;
+      margin: 0 auto;
     }
 
     .hero-eyebrow {
       font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.3em;
       color: var(--gold);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .hero-eyebrow::before {
-      content: "";
-      width: 50px;
-      height: 1px;
-      background: var(--gold);
+      margin-bottom: 2rem;
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-size: clamp(3.2rem, 7vw, 6rem);
       font-weight: 700;
       color: var(--white);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      line-height: 1.1;
     }
 
     .hero h1 em {
@@ -271,16 +221,17 @@
     }
 
     .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
       color: var(--gray);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
+      max-width: 650px;
+      margin: 0 auto 3.5rem;
       line-height: 1.7;
     }
 
     .cta-group {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
+      justify-content: center;
       flex-wrap: wrap;
     }
 
@@ -288,16 +239,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem 2.25rem;
+      padding: 1.1rem 2.6rem;
       font-family: var(--font-body);
       font-size: 0.8rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      border: none;
+      border-radius: var(--radius);
       cursor: pointer;
-      transition: all 0.35s ease;
-      position: relative;
+      transition: all 0.4s var(--transition-smooth);
     }
 
     .btn-primary {
@@ -307,42 +257,42 @@
 
     .btn-primary:hover {
       background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px -10px rgba(201, 168, 76, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px -10px rgba(201, 168, 76, 0.25);
     }
 
     .btn-outline {
       background: transparent;
       color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .btn-outline:hover {
       border-color: var(--gold);
       color: var(--gold);
+      background: rgba(201, 168, 76, 0.02);
+      transform: translateY(-2px);
     }
 
     .hero-badge {
       position: absolute;
-      bottom: 40px;
+      bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
       gap: 1rem;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       color: var(--gray);
-      z-index: 2;
     }
 
     .hero-badge span {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background: var(--red);
       border-radius: 50%;
-      display: inline-block;
     }
 
     /* À Propos */
@@ -352,42 +302,44 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 6rem;
       align-items: center;
     }
 
     .about-text p {
       color: var(--gray);
       font-size: 1.1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-image-wrapper {
+      display: flex;
+      justify-content: center;
     }
 
     .about-img-link {
       display: block;
       position: relative;
       width: 100%;
-      max-width: 450px;
-      margin: 0 auto;
+      max-width: 420px;
       aspect-ratio: 4 / 5;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
     }
 
     .about-img-link img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.8s var(--transition-smooth);
     }
 
     .about-img-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(10, 10, 10, 0.75);
+      inset: 0;
+      background: rgba(10, 10, 10, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -401,10 +353,12 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
+      border: 1px solid rgba(255,255,235,0.3);
+      padding: 0.8rem 1.5rem;
     }
 
     .about-img-link:hover img {
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     .about-img-link:hover .about-img-overlay {
@@ -413,126 +367,190 @@
 
     /* Approche */
     .approche {
-      background-color: var(--charcoal);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: var(--black);
     }
 
     .approche-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 3rem;
     }
 
     .approche-card {
-      background: var(--black);
-      padding: 3rem 2.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--charcoal);
+      padding: 4rem 3.5rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      transition: transform 0.4s var(--transition-smooth);
+    }
+
+    .approche-card:hover {
+      transform: translateY(-5px);
     }
 
     .approche-card .icon {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--gold);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .approche-card h3 {
-      font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--white);
-      margin-bottom: 1.2rem;
-      font-weight: 700;
+      margin-bottom: 1.5rem;
     }
 
     .approche-card p {
       color: var(--gray);
       font-size: 1.05rem;
-      line-height: 1.7;
     }
 
-    /* Réservation */
+    /* Planification (Calendly / TidyCal look) */
     .scheduling-section {
-      background-color: var(--black);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: var(--charcoal);
       text-align: center;
     }
 
     .scheduling-section p {
       color: var(--gray);
       max-width: 600px;
-      margin: 0 auto 2.5rem;
-      font-size: 1.1rem;
+      margin: 0 auto 3rem;
+      font-size: 1.15rem;
     }
 
-    /* Paiement */
-    .payment-section {
+    /* Section Fait pour toi / Pas fait pour toi */
+    .qualification-section {
       background-color: var(--charcoal);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .payment-text-wrapper {
-      text-align: center;
+    .qualification-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
     }
 
-    .payment-text-wrapper p {
+    .qualification-box {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 3.5rem 2.5rem;
+      border-radius: var(--radius);
+    }
+
+    .qualification-box.positive {
+      border-left: 3px solid var(--gold);
+    }
+
+    .qualification-box.negative {
+      border-left: 3px solid var(--red);
+    }
+
+    .qualification-box h3 {
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .qualification-list {
+      list-style: none;
+    }
+
+    .qualification-list li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1.2rem;
       color: var(--gray);
-      max-width: 600px;
-      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    .qualification-list li::before {
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .positive .qualification-list li::before {
+      content: "✓";
+      color: var(--gold);
+    }
+
+    .negative .qualification-list li::before {
+      content: "✕";
+      color: var(--red-soft);
+    }
+
+    /* Tarifs & Paiements adaptatifs */
+    .payment-section {
+      background-color: var(--black);
     }
 
     .payment-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      width: 100%;
+      max-width: 1200px;
+      margin: 5rem auto 0;
+      gap: 2rem;
     }
 
     .payment-card {
-      background: var(--black);
-      padding: 3rem 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--charcoal);
+      padding: 4.5rem 2.5rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.02);
       text-align: center;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.4s var(--transition-smooth), border-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
     }
 
     .payment-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--gold);
+      transform: translateY(-8px);
+      border-color: rgba(201, 168, 76, 0.3);
+      box-shadow: 0 40px 80px -30px rgba(0,0,0,0.7);
     }
 
     .payment-card h3 {
-      font-size: 1.6rem;
+      font-size: 2rem;
       color: var(--white);
     }
 
     .payment-card .sub-plan {
-      color: var(--gray);
+      color: var(--gold);
       font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-top: 0.5rem;
     }
 
     .price {
       font-family: var(--font-display);
-      font-size: 3rem;
-      color: var(--gold);
-      margin: 1.5rem 0;
+      font-size: 4rem;
+      color: var(--white);
+      margin: 2rem 0;
       font-weight: 700;
     }
 
     .payment-card .plan-desc {
       color: var(--gray);
-      margin-bottom: 2rem;
-      min-height: 50px;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+      min-height: 60px;
     }
 
-    /* 🔄 Carrousel infini de Partenaires corrigé */
+    /* Marquee Partenaires */
     .partners-section {
-      padding: 60px 0;
-      background-color: var(--black);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 80px 0;
+      background-color: var(--charcoal);
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
     }
     
     .partners-section .container {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
       text-align: center;
     }
 
@@ -541,92 +559,84 @@
       width: 100%;
       position: relative;
       display: flex;
+      mask-image: linear-gradient(to right, transparent, var(--black) 15%, var(--black) 85%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, var(--black) 15%, var(--black) 85%, transparent);
     }
 
     .marquee-track {
       display: flex;
       width: max-content;
-      white-space: nowrap;
-      gap: 80px; 
-      animation: scroll-marquee 20s linear infinite;
-    }
-
-    .marquee-container:hover .marquee-track {
-      animation-play-state: paused;
-    }
-
-    .partner-logo {
-      display: inline-block;
-      flex-shrink: 0;
+      gap: 100px; 
+      animation: scroll-marquee 25s linear infinite;
     }
 
     .partner-logo img {
-      height: 50px;
+      height: 45px;
       width: auto;
       object-fit: contain;
-      filter: grayscale(100%) brightness(0.8);
-      transition: filter 0.3s ease;
+      filter: grayscale(100%) brightness(0.6);
+      transition: filter 0.4s ease, transform 0.4s ease;
     }
 
     .partner-logo img:hover {
       filter: grayscale(0%) brightness(1);
+      transform: scale(1.04);
     }
 
     @keyframes scroll-marquee {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); } /* Boucle parfaite à la moitié exacte du contenu */
+      100% { transform: translateX(-50%); }
     }
 
     /* Au-delà du Coaching */
     .beyond-coaching {
-      background-color: var(--charcoal);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: var(--black);
     }
 
     .beyond-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: start;
     }
 
     .beyond-card {
-      background: var(--black);
-      padding: 2.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--charcoal);
+      padding: 4rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.02);
     }
 
     .beyond-card h3 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: var(--white);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     .beyond-card p {
       color: var(--gray);
-      font-size: 1.05rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.7;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     }
 
     .beyond-quote {
       border-left: 2px solid var(--gold);
-      padding-left: 1.5rem;
+      padding-left: 2rem;
       font-style: italic;
       color: var(--white) !important;
       font-family: var(--font-display);
-      font-size: 1.25rem !important;
+      font-size: 1.35rem !important;
+      line-height: 1.5;
     }
 
-    /* Événements */
+    /* Événements & Stack d'images interactif */
     .events {
-      background-color: var(--black);
+      background-color: var(--charcoal);
     }
 
     .events-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 6rem;
       align-items: center;
     }
 
@@ -639,10 +649,11 @@
     .image-stack-container {
       position: relative;
       width: 100%;
-      max-width: 400px;
-      height: 480px;
+      max-width: 380px;
+      height: 460px;
       margin: 0 auto;
       user-select: none;
+      overflow: hidden;
     }
 
     .stack-card {
@@ -650,16 +661,68 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border: 4px solid var(--charcoal);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.6s ease;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+      transition: transform 0.4s var(--transition-smooth), opacity 0.4s ease;
+    }
+
+    /* Formulaire Infolettre */
+    .newsletter-wrapper {
+      width: 100%;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      margin-bottom: 3rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 550px;
+      margin: 1.5rem auto 0;
+      gap: 0.5rem;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: var(--charcoal);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 1.5rem;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      border-radius: var(--radius);
+      transition: border-color 0.3s ease;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .newsletter-submit {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 0 2rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .newsletter-submit:hover {
+      background: var(--gold-light);
     }
 
     /* Pied de page */
     footer {
       background: var(--black);
-      padding: 80px 0 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 100px 0 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .footer-inner {
@@ -667,19 +730,19 @@
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 3rem;
-      margin-bottom: 60px;
+      gap: 4rem;
+      margin-bottom: 80px;
     }
 
     .footer-brand h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--white);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
     .footer-brand p {
       color: var(--gray);
-      font-size: 0.95rem;
+      font-size: 1rem;
       max-width: 320px;
     }
 
@@ -687,15 +750,15 @@
       font-family: var(--font-body);
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       color: var(--gold);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .footer-contact a {
       display: block;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
       transition: color 0.3s ease;
     }
 
@@ -708,48 +771,44 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 2rem;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
       font-size: 0.8rem;
       color: var(--gray);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      width: 100%;
+      letter-spacing: 0.15em;
     }
 
     .footer-links a {
-      color: #a0a0a0;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      margin-left: 15px;
+      color: var(--gray);
+      transition: color 0.3s ease;
+      margin-left: 20px;
     }
 
     .footer-links a:hover {
       color: var(--white);
-      text-decoration: underline;
     }
 
-    /* 🔼 Bouton Back to Top */
+    /* Bouton Back to Top Épuré */
     .back-to-top {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
+      bottom: 40px;
+      right: 40px;
       background-color: var(--gold);
       color: var(--black);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1rem;
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.4s var(--transition-smooth);
       z-index: 2000;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
 
     .back-to-top.visible {
@@ -759,83 +818,62 @@
 
     .back-to-top:hover {
       background-color: var(--gold-light);
-      transform: translateY(-3px);
+      transform: translateY(-4px);
     }
 
-    /* 📱 RESPONSIVE (Max 768px) */
-    @media (max-width: 768px) {
-      section { padding: 60px 0; }
-      .mobile-menu-toggle { display: flex; }
-
-      .nav-links { 
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: rgba(10, 10, 10, 0.98);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        z-index: 999;
-      }
-
-      .nav-links.active { left: 0; }
-      .nav-links a { font-size: 1.4rem; }
-
-      .hero { padding-top: 100px; text-align: center; }
-      .hero-eyebrow { justify-content: center; }
-      .hero-eyebrow::before { display: none; }
-      .cta-group { justify-content: center; }
-
-      .about-grid { direction: rtl; }
-      .about-text, .about-img-link { direction: ltr; }
-      
-      .about-grid, .beyond-grid, .events-grid, .approche-grid {
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      section { padding: 100px 0; }
+      .about-grid, .beyond-grid, .events-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 4rem;
         text-align: center;
       }
-      
+      .about-image-wrapper, .image-stack-container {
+        order: -1;
+      }
       .beyond-card, .approche-card { text-align: left; }
-      .image-stack-container { height: 380px; max-width: 300px; }
-      .footer-inner { flex-direction: column; text-align: center; align-items: center; }
-      .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
-      .footer-links a { margin: 0 8px; }
-      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .qualification-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .newsletter-form {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .newsletter-submit {
+        padding: 1rem;
+      }
+      .approche-grid { grid-template-columns: 1fr; }
+      .beyond-card { padding: 3rem 2rem; }
+      .footer-inner { flex-direction: column; gap: 3rem; text-align: center; align-items: center; }
+      .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links a { margin: 0 10px; }
+      .back-to-top { bottom: 25px; right: 25px; width: 42px; height: 42px; }
     }
   </style>
 </head>
 
 <body>
+
   <header>
-    <nav class="container">
+    <nav>
       <a href="#" class="logo">〶 Ronide Casséus 〶</a>
-      <!-- Menu épuré avec uniquement les 4 sections demandées -->
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Accueil</a></li>
-        <li><a href="#paiement">Tarifs</a></li>
-        <li><a href="#reservation">Rendez-vous</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </nav>
   </header>
 
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-eyebrow">Coach certifiée PNL et conférencière</div>
-        <h1>Deviens cette personne que tu devrais <em>être.</em></h1>
-        <p>Coaching pour les personnes prêtes à entreprendre un véritable travail sur elles-mêmes — développer la maturité, la <em>profondeur émotionnelle</em> et le courage de vivre avec intention.</p>
+        <div class="hero-eyebrow">Coach certifiée PNL et Conférencière</div>
+        <h1>Transformer tes épreuves en <em>leviers de changement</em> pour retrouver une vie plus lumineuse</h1>
+        <p>Coaching pour les personnes prêtes à entreprendre un véritable travail sur elles-mêmes — développer la maturité, 
+          la <em>profondeur émotionnelle</em> et le courage de vivre avec intention. Je t'aide à comprendre ce qui te bloque, 
+          à transformer tes défis en opportunités de croissance et à passer à l'action pour créer une vie plus alignée avec 
+          tes aspirations.</p>
         <div class="cta-group">
           <a href="#reservation" class="btn btn-primary">Réservez votre séance</a>
           <a href="#paiement" class="btn btn-outline">Voir les tarifs</a>
@@ -847,21 +885,24 @@
     </div>
   </section>
 
-  <section class="about" id="about">
+  <section class="about reveal" id="about">
     <div class="container">
       <div class="about-grid">
         <div class="about-text">
           <span class="eyebrow">À Propos</span>
-          <h2 class="section-title">〶 Ronide Casséus 〶</h2>
           <div class="gold-line"></div>
-          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL et conférencière, Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
-          <p>Son approche allie rigueur, profondeur émotionnelle et respect, créant un espace sécuritaire pour un travail d'introspection significatif.</p>
+          <h2 class="section-title">〶 Ronide Casséus 〶</h2>
+          
+          <p>Une force tranquille dédiée à l'éveil du potentiel humain. En tant que coach certifiée PNL et conférencière, 
+            Ronide guide les individus à travers les méandres de la croissance personnelle pour atteindre une clarté absolue.</p>
+          <p>Son approche allie rigueur, profondeur émotionnelle et respect, 
+            créant un espace sécuritaire pour un travail d'introspection significatif.</p>
         </div>
         <div class="about-image-wrapper">
           <a href="https://www.facebook.com/ronide.casseus.2025" target="_blank" rel="noopener noreferrer" class="about-img-link">
             <img src="./images/RNP_0419-1.jpg" alt="Ronide Casséus" />
             <div class="about-img-overlay">
-              <p>En savoir plus sur moi</p>
+              <p>En voir plus</p>
             </div>
           </a>
         </div>
@@ -869,7 +910,7 @@
     </div>
   </section>
 
-  <section class="approche" id="approche">
+  <section class="approche reveal" id="approche">
     <div class="container">
       <div class="center-title">
         <span class="eyebrow">Une Double Expertise</span>
@@ -896,11 +937,12 @@
     </div>
   </section>
 
-  <section class="scheduling-section" id="reservation">
+  <section class="scheduling-section reveal" id="reservation">
     <div class="container">
       <span class="eyebrow">Planification</span>
-      <h2 class="section-title">Prendre un rendez-vous</h2>
       <div class="gold-line" style="margin: 1.5rem auto;"></div>
+      <h2 class="section-title">Prendre un rendez-vous</h2>
+      
       <p>Sélectionnez le moment qui vous convient le mieux directement dans mon calendrier Google pour commencer votre accompagnement personnalisé.</p>
       <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ14_qPX-4RSuGyOeZ8QCopcYqZnkSQiadbD_PJhbPigA0OZ_-eVofvBP3eDfKWJyacUWR2Xg4ET" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
         Choisissez vos heures
@@ -908,92 +950,121 @@
     </div>
   </section>
 
-  <section class="payment-section" id="paiement">
+  <section class="qualification-section reveal" id="validation">
     <div class="container">
-      <div class="payment-text-wrapper">
+      <div class="center-title">
+        <span class="eyebrow">Alignement</span>
+        <h2 class="section-title">Est-ce le bon moment pour vous ?</h2>
+        <div class="gold-line"></div>
+        <p style="color: var(--gray);">Un travail d'introspection demande de l'engagement. Assurons-nous que ma méthode résonne avec vos besoins actuels.</p>
+      </div>
+
+      <div class="qualification-grid">
+        <div class="qualification-box positive">
+          <h3>C'est fait pour toi si...</h3>
+          <ul class="qualification-list">
+            <li>Tu es prêt(e) à regarder tes blocages en face avec honnêteté.</li>
+            <li>Tu cherches des outils concrets et une structure pour passer à l'action.</li>
+            <li>Tu as conscience que le vrai changement vient d'un travail sur soi intentionnel.</li>
+            <li>Tu veux transformer tes épreuves passées en forces de résilience.</li>
+          </ul>
+        </div>
+
+        <div class="qualification-box negative">
+          <h3>Ce n'est pas pour toi si...</h3>
+          <ul class="qualification-list">
+            <li>Tu cherches une solution magique sans effort personnel.</li>
+            <li>Tu préfères rester dans une posture de victime face aux événements.</li>
+            <li>Tu n'es pas prêt(e) à investir du temps et de l'énergie dans ton évolution.</li>
+            <li>Tu attends simplement qu'on te dise exactement quoi faire sans réfléchir par toi-même.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="payment-section reveal" id="paiement">
+    <div class="container">
+      <div class="center-title">
         <span class="eyebrow">Investissement sur soi</span>
         <h2 class="section-title">Séances &amp; Règlements</h2>
-        <div class="gold-line" style="margin: 1.5rem auto;"></div>
-        <p>Choisissez la formule adaptée à votre parcours et effectuez votre versement en toute sécurité avant notre rencontre.</p>
+        <div class="gold-line"></div>
+        <p style="color: var(--gray);">Choisissez la formule adaptée à votre parcours et effectuez votre versement en toute sécurité avant notre rencontre.</p>
       </div>
 
       <div class="payment-grid">
+        <!-- Forfait 1 -->
         <div class="payment-card">
           <h3>Séance Initiale</h3>
-          <p class="sub-plan">Clarté &amp; Analyse des besoins</p>
+          <p class="sub-plan">Clarté &amp; Analyse</p>
           <div class="price">150 $</div>
           <p class="plan-desc">Une séance intensive d'une heure pour fixer vos objectifs et initier le changement.</p>
           <a href="https://book.stripe.com/3cI00kghJ94YbAwfkjcfK00" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">Régler la séance</a>
         </div>
 
-        <div class="payment-card" style="border-color: rgba(201, 168, 76, 0.3);">
-          <span style="font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; font-weight: 600;">Recommandé</span>
-          <h3 style="margin-top: 0.5rem;">Accompagnement Privé</h3>
-          <p class="sub-plan">Forfait transformation intentionnelle</p>
-          <div class="price">675 $</div>
-          <p class="plan-desc">Cycle complet de 5 séances de coaching PNL personnalisé pour ancrer la maturité.</p>
+        <!-- Forfait 2 -->
+        <div class="payment-card">
+          <h3>Forfait Alignement</h3>
+          <p class="sub-plan">Impulsion &amp; Déclic</p>
+          <div class="price">425 $</div>
+          <p class="plan-desc">Cycle ciblé de 3 séances pour débloquer une situation précise et retrouver une vision claire.</p>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%;">Acheter le forfait</a>
+        </div>
+
+        <!-- Forfait 3 -->
+        <div class="payment-card" style="border-color: rgba(201, 168, 76, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+          <h3 style="color: var(--gold);">Transformation</h3>
+          <p class="sub-plan">Accompagnement Privé</p>
+          <div class="price" style="color: var(--gold);">675 $</div>
+          <p class="plan-desc">Cycle complet de 5 séances de coaching PNL personnalisé pour ancrer durablement la maturité.</p>
           <a href="https://book.stripe.com/6oUbJ2d5x94Y484dcbcfK01" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Acheter le forfait</a>
+        </div>
+
+        <!-- Forfait 4 -->
+        <div class="payment-card">
+          <h3>Atelier / Conférence</h3>
+          <p class="sub-plan">Sur Mesure (Corporatif / OBNL)</p>
+          <div class="price" style="font-size: 2.5rem; margin: 2.9rem 0;">Sur devis</div>
+          <p class="plan-desc">Intervention d'impact ou atelier immersif adapté aux besoins de votre organisation ou communauté.</p>
+          <a href="#reservation" class="btn btn-outline" style="width: 100%;">Me contacter</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="partners-section">
+  <section class="partners-section reveal">
     <div class="container">
       <span class="eyebrow" style="margin-bottom: 0;">Ils me font confiance</span>
     </div>
     <div class="marquee-container">
       <div class="marquee-track">
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" />
-        </a>
-        <!-- Duplication exacte requise pour le défilement infini fluide -->
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 2" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 3" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire RoMEDIA 4" />
-        </a>
-        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo">
-          <img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire RoMEDIA 5" />
-        </a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire" /></a>
+        <!-- Duplication pour boucle infinie parfaite -->
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale.png" alt="Partenaire" /></a>
+        <a href="https://www.afpad.ca" target="_blank" rel="noopener noreferrer" class="partner-logo"><img src="./images/logo/RoMedia-Changer-Greyscale-white.png" alt="Partenaire" /></a>
       </div>
     </div>
   </section>
 
-  <section class="beyond-coaching" id="engagement">
+  <section class="beyond-coaching reveal" id="engagement">
     <div class="container">
       <span class="eyebrow">Au-delà du Coaching</span>
-      <h2 class="section-title">Racines &amp; Résilience à Montréal</h2>
       <div class="gold-line"></div>
+      <h2 class="section-title">Racines &amp; Résilience à Montréal</h2>
       
       <div class="beyond-grid">
         <div class="beyond-card">
           <h3>20 ans d'ancrage communautaire</h3>
           <p>Bien avant de guider ses clients, Ronide a consacré plus de deux décennies de sa vie au terrain à Montréal-Nord, dans les rues de Chartrand, dans les coeurs des femmes et des familles du quartier. Intervenante dévouée, elle a travaillé sans relâche auprès des jeunes pour bâtir des ponts et les élever à leur sommet.</p>
-        </div>
-
-        <div class="beyond-card">
           <h3>Transformer l'épreuve en lumière</h3>
-          <p>En août 2022, la vie de Ronide a été bouleversée by la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
+          <p>En août 2022, la vie de Ronide a été bouleversée par la perte tragique et injuste de son fils unique, Jayson Colin, un jeune leader lumineux abattu à Montréal-Nord. Face à ce deuil traumatique absolu, elle a choisi la voie de la dignité, de la justice et de l'accompagnement.</p>
           <p class="beyond-quote">« C'était mon enfant, mais c'était aussi mon meilleur ami et mon confident. On était une équipe. »</p>
           <p style="margin-top: 1.5rem;">Aujourd'hui, son combat résonne à travers son implication (notamment auprès de l'AFPAD), de sa propre résilience en boussole.</p>
         </div>
@@ -1001,26 +1072,27 @@
     </div>
   </section>
 
-  <section class="events" id="events">
+  <section class="events reveal" id="events">
     <div class="container">
       <div class="events-grid">
         <div class="image-stack-container" id="eventStack" style="cursor: pointer;">
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement 1" class="stack-card" />
-          <img src="./images/Ronide-Photo-52.png" alt="Événement 2" class="stack-card" />
-          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement 3" class="stack-card" />
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement 4" class="stack-card" />
-          <img src="./images/Ronide-Photo-52.png" alt="Événement 5" class="stack-card" />
-          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement 6" class="stack-card" />
-          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement 7" class="stack-card" />
-          <img src="./images/Ronide-Photo-52.png" alt="Événement 8" class="stack-card" />
-          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement 9" class="stack-card" />
-          <img src="./images/RNP_0364-1.jpg" alt="Événement 10" class="stack-card" />
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement" class="stack-card" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement" class="stack-card" />
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement" class="stack-card" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement" class="stack-card" />
+          <img src="./images/personnalites_2022-dossier-web-casseus-berlus-1200x675.jpg" alt="Événement" class="stack-card" />
+          <img src="./images/Ronide-Photo-52.png" alt="Événement" class="stack-card" />
+          <img src="./images/1ae46a99391f32769ae82a170ebc89a3.jpg" alt="Événement" class="stack-card" />
+          <img src="./images/RNP_0364-1.jpg" alt="Événement" class="stack-card" />
         </div>
         
         <div class="events-text">
           <span class="eyebrow">Parcours &amp; Rencontres</span>
-          <h2 class="section-title">Événements &amp; Conférences</h2>
           <div class="gold-line"></div>
+          <h2 class="section-title">Événements &amp; Conférences</h2>
+          
           <p>Présente lors de grands rassemblements inspirants, Ronide partage sa vision de l'alignement personnel et de la maturité émotionnelle à travers des ateliers interactifs et des interventions marquantes.</p>
           <p>Restez à l'affût des prochains ateliers immersifs et des masterclasses prévues pour vous aider à cultiver votre espace de puissance interne.</p>
         </div>
@@ -1030,6 +1102,19 @@
 
   <footer id="contact">
     <div class="container">
+      
+      <!-- Barre Infolettre intégrée au pied de page -->
+      <div class="newsletter-wrapper">
+        <div style="text-align: center; max-width: 500px; margin: 0 auto;">
+          <h4 style="font-family: var(--font-body); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--gold);">Restons connectés</h4>
+          <p style="color: var(--gray); font-size: 0.95rem; margin-top: 0.5rem;">Recevez mes réflexions mensuelles sur la résilience, la clarté et l'évolution personnelle.</p>
+          <form class="newsletter-form" action="#" method="POST">
+            <input type="email" class="newsletter-input" placeholder="Votre adresse courriel" required />
+            <button type="submit" class="newsletter-submit">S'inscrire</button>
+          </form>
+        </div>
+      </div>
+
       <div class="footer-inner">
         <div class="footer-brand">
           <h2>Ronide Casséus</h2>
@@ -1037,102 +1122,104 @@
         </div>
         <div class="footer-contact">
           <h4>Commençons</h4>
-          <a href="mailto:ronidecasseus@gmail.com">✉ ronidecasseus@gmail.com</a>
-          <a href="tel:+15145889168">✆ (514) 588-9168</a>
+          <a href="mailto:ronidecasseus@gmail.com">ronidecasseus@gmail.com</a>
+          <div class="gold-line"></div>
+          <a href="tel:+15145889168">(514) 588-9168</a>
           <a href="#reservation">Prendre rendez-vous</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>Créer avec intention.</span>
-        <p>&copy; 2026 Ronide Casséus. Tous droits réservés.</p>
+        <p>2026 &copy; Ronide Casséus. Tous droits réservés.</p>
         <div class="footer-links">
           <a href="legal.html">Mentions légales & Confidentialité</a>
+          <p>Ce site est propulsé par <a href="http://instagram.com/romedia.mtl" target="_blank" rel="noopener noreferrer">RoMedia</a></p>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Bouton Retour en haut -->
   <div class="back-to-top" id="backToTop" title="Retour en haut">▲</div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Menu Mobile 
-      const menuToggle = document.getElementById('menuToggle');
-      const navLinksContainer = document.getElementById('navLinks');
-      const navLinks = document.querySelectorAll('#navLinks a');
+      
+      // 1. Apparition fluide au scroll (Reveal)
+      const reveals = document.querySelectorAll('.reveal');
+      const revealOnScroll = () => {
+        for (let i = 0; i < reveals.length; i++) {
+          let windowHeight = window.innerHeight;
+          let elementTop = reveals[i].getBoundingClientRect().top;
+          let elementVisible = 100;
+          
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add('active');
+          }
+        }
+      };
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll(); // Vérification initiale au chargement
 
-      if (menuToggle && navLinksContainer) {
-        menuToggle.addEventListener('click', function() {
-          menuToggle.classList.toggle('active');
-          navLinksContainer.classList.toggle('active');
+      // 2. Bouton Retour en haut (Back to Top)
+      const backToTop = document.getElementById('backToTop');
+      if (backToTop) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 400) {
+            backToTop.classList.add('visible');
+          } else {
+            backToTop.classList.remove('visible');
+          }
         });
 
-        navLinks.forEach(link => {
-          link.addEventListener('click', function() {
-            menuToggle.classList.remove('active');
-            navLinksContainer.classList.remove('active');
-          });
+        backToTop.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
 
-      // Gestion visuelle du bouton Back To Top
-      const backToTopBtn = document.getElementById('backToTop');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 400) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-      });
-
-      backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-
-      // Gestion de la pile d'images (Événements)
-      const stack = document.getElementById('eventStack');
-      if (stack) {
-        const cards = Array.from(stack.querySelectorAll('.stack-card'));
-        let currentIndex = 0;
-
+      // 3. Mécanique de la pile d'images interactive (Stack Cards)
+      const stackContainer = document.getElementById('eventStack');
+      if (stackContainer) {
+        let cards = Array.from(stackContainer.querySelectorAll('.stack-card'));
+        
         function updateStack() {
           cards.forEach((card, index) => {
-            let position = (index - currentIndex + cards.length) % cards.length;
-
-            if (position === 0) {
-              card.style.transform = "rotate(-1deg) translate(0px, 0px) scale(1)";
-              card.style.zIndex = cards.length;
+            const depth = cards.length - 1 - index;
+            card.style.zIndex = index;
+            
+            if (depth === 0) {
+              card.style.transform = "translateY(0) scale(1) rotate(0deg)";
               card.style.opacity = "1";
               card.style.pointerEvents = "auto";
-            } else if (position === 1) {
-              card.style.transform = "rotate(4deg) translate(10px, 5px) scale(0.98)";
-              card.style.zIndex = cards.length - 1;
-              card.style.opacity = "0.7";
-              card.style.pointerEvents = "none";
-            } else if (position === 2) {
-              card.style.transform = "rotate(-6deg) translate(-15px, -10px) scale(0.96)";
-              card.style.zIndex = cards.length - 2;
-              card.style.opacity = "0.4";
+            } else if (depth <= 3) {
+              const yOffset = depth * 12;
+              const scaleOffset = 1 - (depth * 0.04);
+              const rotateOffset = (depth % 2 === 0 ? 1 : -1) * (depth * 2);
+              
+              card.style.transform = `translateY(${yOffset}px) scale(${scaleOffset}) rotate(${rotateOffset}deg)`;
+              card.style.opacity = "0.8";
               card.style.pointerEvents = "none";
             } else {
-              card.style.transform = `rotate(${Math.sin(position) * 5}deg) translate(0px, 15px) scale(0.92)`;
-              card.style.zIndex = cards.length - position;
+              card.style.transform = "translateY(40px) scale(0.8) rotate(4deg)";
               card.style.opacity = "0";
               card.style.pointerEvents = "none";
             }
           });
         }
 
-        stack.addEventListener('click', function() {
-          currentIndex = (currentIndex + 1) % cards.length;
-          updateStack();
-        });
-
         updateStack();
+
+        stackContainer.addEventListener('click', function() {
+          if (cards.length <= 1) return;
+
+          const topCard = cards[cards.length - 1];
+          topCard.style.transform = "translateX(110%) scale(0.95) rotate(8deg)";
+          topCard.style.opacity = "0";
+          
+          setTimeout(() => {
+            cards.unshift(cards.pop());
+            updateStack();
+          }, 300);
+        });
       }
     });
   </script>
