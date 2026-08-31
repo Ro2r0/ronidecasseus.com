@@ -1,0 +1,304 @@
+<!--
+  Section "Tarifs & Réservation"
+  À coller dans un bloc "HTML embed" de Hostinger (remplace la section actuelle avec les cartes).
+  Tout est autonome : CSS inclus, aucune dépendance externe sauf Google Fonts.
+-->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  .tarifs-section {
+    --gold: #c9a24b;
+    --gold-light: #e0c07a;
+    --bg-dark: ##3a3a3a;
+    --card-bg: #4a4a4a;
+    --card-border: rgba(255,255,255,0.08);
+    --text-light: #f5f5f0;
+    --text-muted: #d9d9d4;
+
+    background: var(--bg-dark);
+    padding: 100px 24px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-light);
+  }
+
+  .tarifs-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  .tarifs-eyebrow {
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .tarifs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 48px;
+    margin: 12px 0 20px;
+  }
+
+  .tarifs-divider {
+    width: 64px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 24px;
+  }
+
+  .tarifs-subtext {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* --- Grille des cartes --- */
+  .tarifs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 24px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .tarif-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .tarif-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.35);
+    border-color: rgba(201,162,75,0.4);
+  }
+
+  /* Les 3 premières cartes s'étirent sur les 2 rangées */
+  .tarif-card.tall {
+    grid-row: span 2;
+  }
+
+  /* Colonne 4 : Atelier (rangée 1) + Conférence (rangée 2) */
+  .tarif-card.compact {
+    grid-column: 4;
+    justify-content: center;
+  }
+  .tarif-card.compact:nth-of-type(1) { grid-row: 1; }
+
+  /* Badge "Populaire" */
+  .tarif-card.populaire {
+    background: var(--card-bg);
+    padding-top: 56px;
+  }
+
+  .badge-populaire {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--gold);
+    color: #2c2c2c;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    padding: 10px 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .tarif-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .tarif-subtitle {
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .tarif-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .tarif-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 24px;
+  }
+
+  .tarif-price.on-devis {
+    font-size: 28px;
+  }
+
+  .tarif-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    text-align: left;
+    flex-grow: 1;
+  }
+
+  .tarif-list li {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .tarif-list li::before {
+    content: '•';
+    color: var(--gold);
+    position: absolute;
+    left: 0;
+  }
+
+  /* --- Boutons --- */
+  .tarif-btn {
+    margin-top: auto;
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1.5px solid var(--text-light);
+    background: transparent;
+    color: var(--text-light);
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .tarif-btn:hover {
+    transform: scale(1.06);
+    background: var(--text-light);
+    color: #2c2c2c;
+  }
+
+  .tarif-btn.filled {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #2c2c2c;
+  }
+
+  .tarif-btn.filled:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    transform: scale(1.06);
+  }
+
+  /* --- Responsive mobile --- */
+  @media (max-width: 900px) {
+    .tarifs-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+    .tarif-card.tall,
+    .tarif-card.compact {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    .tarifs-title {
+      font-size: 34px;
+    }
+  }
+</style>
+
+<section class="tarifs-section">
+  <div class="tarifs-header">
+    <div class="tarifs-eyebrow">Investissement sur soi</div>
+    <h2 class="tarifs-title">Tarifs &amp; Réservation</h2>
+    <div class="tarifs-divider"></div>
+    <p class="tarifs-subtext">
+      Pour un accompagnement individuel, choisissez la formule adaptée à vos besoins et effectuez votre
+      versement en toute sécurité pour valider votre rendez-vous.<br>
+      Pour les projets d'entreprise, demandez votre soumission personnalisée.
+    </p>
+  </div>
+
+  <div class="tarifs-grid">
+
+    <!-- Découverte -->
+    <div class="tarif-card tall">
+      <h3 class="tarif-title">Découverte</h3>
+      <div class="tarif-subtitle">Clarté &amp; Analyse</div>
+      <div class="tarif-price">200$</div>
+      <ul class="tarif-list">
+        <li>Mise en lumière des blocages principaux</li>
+        <li>1 séance de 1h30</li>
+        <li>1 plan d'action adapté à vos besoins et votre réalité</li>
+      </ul>
+      <a href="#" class="tarif-btn">Régler la séance</a>
+    </div>
+
+    <!-- Transformation (populaire) -->
+    <div class="tarif-card tall populaire">
+      <div class="badge-populaire">Populaire</div>
+      <h3 class="tarif-title">Transformation</h3>
+      <div class="tarif-subtitle">Accompagnement privé</div>
+      <div class="tarif-price">625 $</div>
+      <p class="tarif-desc">Sortir du blocage et commencer à reprendre le contrôle de ta vie</p>
+      <ul class="tarif-list">
+        <li>4 séances de 1h00</li>
+        <li>Stratégies de changement concrètes</li>
+        <li>Exercices entre les séances</li>
+      </ul>
+      <a href="#" class="tarif-btn filled">Acheter le forfait</a>
+    </div>
+
+    <!-- Alignement -->
+    <div class="tarif-card tall">
+      <h3 class="tarif-title">Alignement</h3>
+      <div class="tarif-subtitle">Impulsion + Déclic</div>
+      <div class="tarif-price">1 250 $</div>
+      <ul class="tarif-list">
+        <li>8 séances de 1h00</li>
+        <li>Travail sur l'identité et les croyances limitantes</li>
+        <li>Libération des schémas répétitifs</li>
+        <li>Exercices d'intégration entre les séances</li>
+        <li>Suivi entre les séances</li>
+      </ul>
+      <a href="#" class="tarif-btn">Acheter le forfait</a>
+    </div>
+
+    <!-- Atelier -->
+    <div class="tarif-card compact">
+      <h3 class="tarif-title">Atelier</h3>
+      <div class="tarif-subtitle">Sur mesure</div>
+      <a href="#contact" class="tarif-btn">Me contacter</a>
+    </div>
+
+    <!-- Conférence -->
+    <div class="tarif-card compact">
+      <h3 class="tarif-title">Conférence</h3>
+      <div class="tarif-subtitle">Corpo / OBNL</div>
+      <div class="tarif-price on-devis">sur devis</div>
+      <a href="#contact" class="tarif-btn">Me contacter</a>
+    </div>
+
+  </div>
+</section>
